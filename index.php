@@ -6,6 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Train Delays and Weather Disruptions</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./src/style.css">
+
     <!-- Include Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Include Chart.js -->
@@ -21,24 +26,24 @@
 
     <!-- Statistic Cards -->
     <article class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-        <section class="bg-gray-800 p-6 rounded-lg">
-            <h3 class="text-lg font-semibold mb-2">Durchschnittliche monatliche Verspätungen</h3>
+        <section class=" border border-gray-100 p-6 rounded-lg relative">
+            <p class="text-lg font-semibold mb-2">Durchschnittliche monatliche Verspätungen</p>
             <p class="text-3xl font-bold">66</p>
             <p class="text-sm text-gray-400">Züge pro Monat</p>
         </section>
-        <section class="bg-gray-800 p-6 rounded-lg">
-            <h3 class="text-lg font-semibold mb-2">Monat mit den meisten Verspätungen</h3>
+        <section class=" border border-gray-100 p-6 rounded-lg relative">
+            <p class="text-lg font-semibold mb-2">Monat mit den meisten Verspätungen</p>
             <p class="text-3xl font-bold">April</p>
             <p class="text-sm text-gray-400">81 Verspätungen</p>
         </section>
-        <section class="bg-gray-800 p-6 rounded-lg">
-            <h3 class="text-lg font-semibold mb-2">Wetterkorrelation</h3>
+        <section class=" border border-gray-100 p-6 rounded-lg relative">
+            <p class="text-lg font-semibold mb-2">Wetterkorrelation</p>
             <p class="text-3xl font-bold">73%</p>
             <p class="text-sm text-gray-400">wetterbedingte Verspätungen</p>
         </section>
     </article>
 
-    <h2 class="text2x1 font-semibold mb-4">Verständnis des Wettereinflusses auf die Pünktlichkeit der Züge</h2>
+    <h2 class="text-2xl font-semibold mb-4"">Verständnis des Wettereinflusses auf die Pünktlichkeit der Züge</h2>
     <p class="mt-4 text-sm">Politiker, die regelmässig nach Bern pendeln, sind oft von den gleichen Faktoren betroffen wie Zugverspätungen, insbesondere wenn sie öffentliche Verkehrsmittel nutzen oder auf Strassenverkehr angewiesen sind. Wir haben untersucht, wie sich Wetterereignisse auf die Pünktlichkeit der Pendler auswirken und ob es Muster gibt, die mit den jeweiligen Fahrtrouten zusammenhängen.
         In den letzten Monaten haben wir die durchschnittlichen Verspätungen von Politikern auf ihren Pendelrouten beobachtet. Insbesondere während starker Wetterereignisse gibt es auffällige Korrelationen zwischen Verspätungen und Wetterbedingungen.</p>
 
@@ -61,11 +66,11 @@
     </div>
 
     <h4 class="text-xl font-semibold mb-4">Wichtige Erkenntnisse aus den April-Daten</h4>
-    <p class="mt-4 text-sm text-gray-600">Die höchste Anzahl von Verspätungen (95) trat am 8. April auf, was mit dem Tag der meisten Wetterstörungen (18) zusammenfiel.
+    <p class="mt-4 text-sm">Die höchste Anzahl von Verspätungen (95) trat am 8. April auf, was mit dem Tag der meisten Wetterstörungen (18) zusammenfiel.
         Es gab mehrere Tage mit überdurchschnittlichen Verspätungen (mehr als 81), was darauf hindeutet, dass die hohe monatliche Gesamtzahl nicht auf ein einzelnes extremes Ereignis zurückzuführen war.
         Wetterstörungen variierten von Tag zu Tag erheblich, von 4 bis 18 Vorfällen.
         Die Daten zeigen eine klare Korrelation zwischen Tagen mit hohen Wetterstörungen und erhöhten Zugverspätungen.</p>
-    <p class="mt-4 text-sm text-gray-600">Diese detaillierte Ansicht des Aprils zeigt, dass der Monat zwar insgesamt eine hohe Anzahl von Verspätungen und Wetterstörungen aufwies, diese jedoch nicht gleichmäßig verteilt waren. Stattdessen gab es bestimmte Tage mit besonders hohen Vorfällen, wahrscheinlich aufgrund schwerer Wetterereignisse. Diese Informationen können wertvoll sein für die Planung und Umsetzung gezielter Strategien zur Minderung von Verspätungen während Hochrisikozeiträumen.</p>
+    <p class="mt-4 text-sm">Diese detaillierte Ansicht des Aprils zeigt, dass der Monat zwar insgesamt eine hohe Anzahl von Verspätungen und Wetterstörungen aufwies, diese jedoch nicht gleichmäßig verteilt waren. Stattdessen gab es bestimmte Tage mit besonders hohen Vorfällen, wahrscheinlich aufgrund schwerer Wetterereignisse. Diese Informationen können wertvoll sein für die Planung und Umsetzung gezielter Strategien zur Minderung von Verspätungen während Hochrisikozeiträumen.</p>
 
     <!-- Weather vs Delay Scatter Chart -->
     <h2 class="text-2xl font-semibold mb-4">Korrelation zwischen Wetter und Verspätungen</h2>
