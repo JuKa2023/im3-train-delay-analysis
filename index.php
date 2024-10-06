@@ -84,7 +84,7 @@
                 <p class="mt-4 text-sm">Unsere Analyse zeigt eine starke Korrelation zwischen Wetterstörungen und Zugverspätungen. Im Durchschnitt beobachteten wir für jede wetterbedingte Störung einen Anstieg von 4-6 Zugverspätungen.</p>
                 <div class="mb-10 mt-4">
                     <div class="bg-gray-800 p-4 rounded-lg">
-                        <canvas id="scatterChart" class="w-full h-80"></canvas>
+                        <canvas id="scatterChart" class="w-full h-full"></canvas>
                     </div>
                     <p class="text-15px">Dieses Streudiagramm veranschaulicht die Korrelation zwischen Wetterstörungen und Zugverspätungen.</p>
                 </div>

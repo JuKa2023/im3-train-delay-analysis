@@ -93,6 +93,8 @@ new Chart(aprilChartCtx, {
 
 // Weather vs Delay Scatter Chart
 const scatterChartCtx = document.getElementById('scatterChart').getContext('2d');
+
+
 new Chart(scatterChartCtx, {
     type: 'scatter',
     data: {
@@ -102,7 +104,9 @@ new Chart(scatterChartCtx, {
                 x: data.wetterstoerungen,
                 y: data.verspaetungen
             })),
-            backgroundColor: '#D60001'
+            backgroundColor: '#D60001',
+            borderColor: '#D60001',
+            pointRadius: 10
         }]
     },
     options: {
@@ -110,9 +114,41 @@ new Chart(scatterChartCtx, {
             x: {
                 type: 'linear',
                 position: 'bottom',
-                title: { display: true, text: 'Wetterstörungen' }
+                title: {
+                    display: true,
+                    text: 'Anzahl Wetterstörungen',
+                    color: '#E6E6E6'  // Title color
+                },
+                ticks: {
+                    color: '#E6E6E6',  // Tick label color
+                    padding: 10
+                },
+                grid: {
+                    drawOnChartArea: false,   // Disable grid lines on chart
+                    color: 'transparent',     // Just to be sure grid lines are hidden
+                    borderColor: '#E6E6E6',   // Axis line color
+                    drawBorder: true,         // Ensure the border (axis line) is drawn
+                    drawTicks: true           // Ensure tick marks are drawn
+                }
             },
-            y: { title: { display: true, text: 'Verspätungen' } }
+            y: {
+                title: {
+                    display: true,
+                    text: 'Anzahl Verpätete Züge',
+                    color: '#E6E6E6'  // Title color
+                },
+                ticks: {
+                    color: '#E6E6E6',  // Tick label color
+                    padding: 10
+                },
+                grid: {
+                    drawOnChartArea: false,   // Disable grid lines on chart
+                    color: 'transparent',     // Just to be sure grid lines are hidden
+                    borderColor: '#E6E6E6',   // Axis line color
+                    drawBorder: true,         // Ensure the border (axis line) is drawn
+                    drawTicks: true           // Ensure tick marks are drawn
+                }
+            }
         },
         plugins: {
             tooltip: {
@@ -120,9 +156,24 @@ new Chart(scatterChartCtx, {
                 titleColor: '#E6E6E6',
                 bodyColor: '#E6E6E6'
             }
+        },
+        layout: {
+            padding: {
+                left: 10,
+                right: 10,
+                top: 20,
+                bottom: 10
+            }
+        },
+        elements: {
+            point: {
+                pointStyle: 'circle',
+            }
         }
     }
 });
+
+console.log(scatterChartCtx);
 
 document.addEventListener('DOMContentLoaded', function () {
     // Your chart initialization code here...
