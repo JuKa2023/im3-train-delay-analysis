@@ -125,7 +125,7 @@ new Chart(scatterChartCtx, {
                 },
                 grid: {
                     drawOnChartArea: false,   // Disable grid lines on chart
-                    color: 'transparent',     // Just to be sure grid lines are hidden
+                    color: '#E6E6E6',     // Just to be sure grid lines are hidden
                     borderColor: '#E6E6E6',   // Axis line color
                     drawBorder: true,         // Ensure the border (axis line) is drawn
                     drawTicks: true           // Ensure tick marks are drawn

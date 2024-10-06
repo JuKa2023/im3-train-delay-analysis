@@ -8,7 +8,7 @@
         <title>Train Delays and Weather Disruptions</title>
 
         <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&display=swap" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./src/style.css">
 
         <!-- Include Tailwind CSS -->
@@ -53,8 +53,8 @@
             <section class="mt-4">
                 <h3 class="text-xl font-semibold mb-4">Monatliche Zugverspätungen und Wetterstörungen</h3>
                 <div class="mb-10 mt-4">
-                    <div class="bg-gray-800 p-4 rounded-lg mb-2">
-                        <canvas id="monthlyChart" class="w-full h-80"></canvas>
+                    <div class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
+                        <canvas id="monthlyChart" class="w-full"></canvas>
                     </div>
                     <p class="text-15px">Dieses Diagramm zeigt die Beziehung zwischen Zugverspätungen und Wetterstörungen im Jahr 2023.</p>
                 </div>
@@ -68,7 +68,7 @@
                 <h3 class="text-2xl font-semibold mb-4">April: Ein Monat mit hohen Störungen</h3>
                 <p class="mt-4 text-sm">Der April ist besonders hervorzuheben, da in diesem Monat eine signifikant hohe Anzahl von Verspätungen auftrat, die direkt mit Wetterereignissen in Verbindung stehen. Vor allem an bestimmten Tagen gab es hohe Abweichungen von der geplanten Ankunftszeit in Bern.</p>
                 <div class="mb-10 mt-4">
-                    <div class="bg-gray-800 p-4 rounded-lg mb-2">
+                    <div class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
                         <canvas id="aprilChart" class="w-full h-80"></canvas>
                     </div>
                     <p class="text-15px">Dieses Balkendiagramm zeigt die täglichen Zugverspätungen und Wetterstörungen im April und hebt die Variabilität im Laufe des Monats hervor.</p>
@@ -83,7 +83,7 @@
                 <h2 class="text-2xl font-semibold mb-4">Korrelation zwischen Wetter und Verspätungen</h2>
                 <p class="mt-4 text-sm">Unsere Analyse zeigt eine starke Korrelation zwischen Wetterstörungen und Zugverspätungen. Im Durchschnitt beobachteten wir für jede wetterbedingte Störung einen Anstieg von 4-6 Zugverspätungen.</p>
                 <div class="mb-10 mt-4">
-                    <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
                         <canvas id="scatterChart" class="w-full h-full"></canvas>
                     </div>
                     <p class="text-15px">Dieses Streudiagramm veranschaulicht die Korrelation zwischen Wetterstörungen und Zugverspätungen.</p>
