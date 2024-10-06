@@ -31,13 +31,13 @@ new Chart(monthlyChartCtx, {
             {
                 label: 'Zugverspätungen',
                 data: monthlyData.map(data => data.verspaetungen),
-                borderColor: '#8884d8',
+                borderColor: '#5F94D7',
                 fill: false
             },
             {
                 label: 'Wetterstörungen',
                 data: monthlyData.map(data => data.wetterstoerungen),
-                borderColor: '#82ca9d',
+                borderColor: '#8C238C',
                 fill: false
             }
         ]
@@ -67,12 +67,12 @@ new Chart(aprilChartCtx, {
             {
                 label: 'Zugverspätungen',
                 data: aprilDailyData.map(data => data.verspaetungen),
-                backgroundColor: '#8884d8'
+                backgroundColor: '#5F94D7'
             },
             {
                 label: 'Wetterstörungen',
                 data: aprilDailyData.map(data => data.wetterstoerungen),
-                backgroundColor: '#82ca9d'
+                backgroundColor: '#8C238C'
             }
         ]
     },
@@ -102,7 +102,7 @@ new Chart(scatterChartCtx, {
                 x: data.wetterstoerungen,
                 y: data.verspaetungen
             })),
-            backgroundColor: '#8884d8'
+            backgroundColor: '#D60001'
         }]
     },
     options: {
