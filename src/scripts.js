@@ -43,6 +43,8 @@ new Chart(monthlyChartCtx, {
         ]
     },
     options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: { display: true },
             y: { display: true }
@@ -77,6 +79,8 @@ new Chart(aprilChartCtx, {
         ]
     },
     options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: { display: true },
             y: { display: true }
@@ -93,8 +97,6 @@ new Chart(aprilChartCtx, {
 
 // Weather vs Delay Scatter Chart
 const scatterChartCtx = document.getElementById('scatterChart').getContext('2d');
-
-
 new Chart(scatterChartCtx, {
     type: 'scatter',
     data: {
@@ -110,6 +112,8 @@ new Chart(scatterChartCtx, {
         }]
     },
     options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: {
                 type: 'linear',
@@ -117,36 +121,36 @@ new Chart(scatterChartCtx, {
                 title: {
                     display: true,
                     text: 'Anzahl Wetterstörungen',
-                    color: '#E6E6E6'  // Title color
+                    color: '#E6E6E6'
                 },
                 ticks: {
-                    color: '#E6E6E6',  // Tick label color
+                    color: '#E6E6E6',
                     padding: 10
                 },
                 grid: {
-                    drawOnChartArea: false,   // Disable grid lines on chart
-                    color: '#E6E6E6',     // Just to be sure grid lines are hidden
-                    borderColor: '#E6E6E6',   // Axis line color
-                    drawBorder: true,         // Ensure the border (axis line) is drawn
-                    drawTicks: true           // Ensure tick marks are drawn
+                    drawOnChartArea: false,
+                    color: '#E6E6E6',
+                    borderColor: '#E6E6E6',
+                    drawBorder: true,
+                    drawTicks: true
                 }
             },
             y: {
                 title: {
                     display: true,
                     text: 'Anzahl Verpätete Züge',
-                    color: '#E6E6E6'  // Title color
+                    color: '#E6E6E6'
                 },
                 ticks: {
-                    color: '#E6E6E6',  // Tick label color
+                    color: '#E6E6E6',
                     padding: 10
                 },
                 grid: {
-                    drawOnChartArea: false,   // Disable grid lines on chart
-                    color: 'transparent',     // Just to be sure grid lines are hidden
-                    borderColor: '#E6E6E6',   // Axis line color
-                    drawBorder: true,         // Ensure the border (axis line) is drawn
-                    drawTicks: true           // Ensure tick marks are drawn
+                    drawOnChartArea: false,
+                    color: 'transparent',
+                    borderColor: '#E6E6E6',
+                    drawBorder: true,
+                    drawTicks: true
                 }
             }
         },
@@ -171,10 +175,4 @@ new Chart(scatterChartCtx, {
             }
         }
     }
-});
-
-console.log(scatterChartCtx);
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Your chart initialization code here...
 });

@@ -69,7 +69,7 @@
                 <p class="mt-4 text-sm">Der April ist besonders hervorzuheben, da in diesem Monat eine signifikant hohe Anzahl von Verspätungen auftrat, die direkt mit Wetterereignissen in Verbindung stehen. Vor allem an bestimmten Tagen gab es hohe Abweichungen von der geplanten Ankunftszeit in Bern.</p>
                 <div class="mb-10 mt-4">
                     <div class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
-                        <canvas id="aprilChart" class="w-full h-80"></canvas>
+                        <canvas id="aprilChart" class="w-full h-full"></canvas>
                     </div>
                     <p class="text-15px">Dieses Balkendiagramm zeigt die täglichen Zugverspätungen und Wetterstörungen im April und hebt die Variabilität im Laufe des Monats hervor.</p>
                 </div>
