@@ -1,17 +1,18 @@
-# Pokeverse
+# im3-train-delay-analysis
 
 ## Kurzbeschreibung des Projekts
-Pokebattle ist ein interaktives Projekt, bei dem verschiedene Pokémon recherchiert werden können. Ziel des Projekts ist es, eine Plattform zu schaffen, auf der Nutzer sich zunächst über ihre Pokémon informieren können und anschliessend in einem Memory-Spiel die Paare suchen. Das Projekt nutzt eine Pokémon-API, um Daten über Pokémon, ihre Fähigkeiten und Statistiken zu integrieren.
+Dieses Projekt untersucht die Korrelation zwischen Wetterbedingungen und Zugverspätungen auf bestimmten Strecken in der Schweiz. Die Route dreier Ständeräte – Lisa Mazzone (Genf-Bern), Ruedi Noser (Zürich-Bern) und Marianne Maret (Visp-Bern) – dient als Grundlage. Mithilfe von Wetterdaten (Meteo API) und Zugverspätungsinformationen (SBB API) analysieren wir, ob und wie stark das Wetter (z. B. Regen, Schnee) die Verspätungen beeinflusst. Nutzer können die Route eines Politikers auswählen, aktuelle sowie prognostizierte Zugverspätungen anzeigen lassen und eine Bilanz über häufige Verspätungen ziehen.
 
 ## Autoren
 - [@JuKa2023](https://github.com/JuKa2023)
-- [@Saurabh](https://github.com/sm-fhgr)
 - [@SophiaIseli](https://github.com/SophiaIseli)
 
 ## Features
-- Recherche von Pokémon und deren Fähigkeiten
-- Interaktives Memory-Spiel mit Pokémon
-- Geheime Seite mit exklusiven Inhalten nach erfolgreichem Abschluss des Spiels
+-Live Wetterdaten: Nutzung einer Meteo API, um aktuelle Wetterinformationen zu erhalten (Regen, Schnee, Temperatur, etc.).
+-Zugverspätungs-Analyse: Mithilfe der SBB API werden die aktuellen Verspätungen der Züge auf den ausgewählten Strecken abgerufen.
+-Interaktive Visualisierung: Nutzer können zwischen drei verschiedenen Strecken wählen (Genf-Bern, Zürich-Bern, Visp-Bern) und sich die entsprechenden Wetter- und Verspätungsdaten anzeigen lassen.
+-Prognosen: Basierend auf historischen Daten und aktuellen Wetterbedingungen werden Vorhersagen über mögliche Zugverspätungen gemacht.
+-Bilanz und Fazit: Am Ende werden Trends aufgezeigt, wann und unter welchen Bedingungen Verspätungen besonders häufig auftreten.
 
 ## Installation und Einrichtung
 1. **Repository klonen:**
@@ -31,14 +32,18 @@ Pokebattle ist ein interaktives Projekt, bei dem verschiedene Pokémon recherchi
    Gehe zu `http://localhost/` (sofern du einen lokalen Server verwendest, ansonsten öffne einfach die HTML-Datei direkt).
 
 ## Verwendete Technologien und API
-- HTML, CSS, JavaScript
-- API: [PokéAPI](https://pokeapi.co/)
+- HTML, Tailwind, JavaScript,  Chart.Js
+- API: 
 
 ## Learnings
-Durch die Arbeit an diesem Projekt konnten wir wertvolle Erfahrungen im Umgang mit APIs und in der Projektorganisation sammeln. Wir haben gelernt, wie wichtig eine klare Aufgabenverteilung und Kommunikation im Team sind. Zudem haben wir unsere Fähigkeiten in der Web-Entwicklung und der Nutzung verschiedener Online-Ressourcen zur Problemlösung verbessert.
+-APIs integrieren und verknüpfen: Wir haben gelernt, wie man verschiedene APIs (Wetter- und Zugverspätungsdaten) nahtlos in eine Webanwendung integriert und die Daten sinnvoll kombiniert.
+-Datenanalyse und Visualisierung: Einblicke in die Korrelation von Wetterbedingungen und Verspätungen auf den Strecken wurden durch statistische Auswertungen und die Visualisierung der Ergebnisse gewonnen.
+-Benutzerzentrierte Gestaltung: Wir haben den Fokus darauf gelegt, die Anwendung für den Benutzer einfach und interaktiv zu gestalten.
 
 ## Schwierigkeiten
-Zu Beginn des Projekts standen wir vor der Herausforderung, die geeignete API zu finden und in unser System zu integrieren. Nach der erfolgreichen Auswahl und Integration der API konnten wir uns jedoch gut organisieren. Die Hauptschwierigkeiten lagen in der Koordination der Teamarbeit und der Vermeidung von doppelten Arbeiten und Code-Konflikten. Durch eine klare Aufgabenverteilung und regelmässige Kommunikation konnten wir diese Herausforderungen erfolgreich meistern.
+-Datenzusammenführung: Es war eine Herausforderung, die unterschiedlichen Datenquellen (Wetter und Zugverspätungen) synchron zu verarbeiten, da sie in verschiedenen Formaten und mit unterschiedlichen Aktualisierungszyklen vorliegen.
+-Prognose-Genauigkeit: Das Erstellen genauer Vorhersagen basierend auf den Wetterdaten und der Historie der Zugverspätungen erwies sich als schwieriger als erwartet.
+-Technische Komplexität: Die Echtzeitverarbeitung von Wetter- und Zugdaten stellte besondere Anforderungen an die Architektur und die Performance der Anwendung.
 
 ## Benutzte Ressourcen
 Zur Vorbereitung auf den Kurs schauten wir verschiedene Tutorials auf [YouTube](https://www.youtube.com/) oder Mini-Kurse auf der Seite [Coursera](https://www.coursera.org/). Auf beiden Seiten haben wir Tutorials spezifisch zur Einbindung von APIs sowie zur schlauen Entwicklung und Integration von Animationen gefunden. Dies ermöglichte uns, sofort in das Projekt einzusteigen, und diente uns ebenfalls als Quelle bei Unklarheiten.
@@ -48,13 +53,13 @@ Während der Entwicklung stiessen wir auf technische Herausforderungen. In solch
 Für Design-Inspirationen haben wir häufig die Seite CodePen [CodePen](https://codepen.io/) genutzt. Diese Plattform erfordert jedoch eine gewisse Menge an Fachjargon und Vorwissen, um die gewünschten Ergebnisse zu finden. Es ist wichtig, klar anzugeben, mit welchen Technologien man arbeitet und ob man bestimmte Frameworks verwendet oder nicht, um relevante und nützliche Beispiele zu finden.
 
 ## Erweiterungsmöglichkeiten
-Das Projekt könnte in Zukunft durch ein interaktives Pokémon-Battle erweitert werden. Dabei könnten die Spielregeln des Pokémon-Kartenspiels integriert werden, hierfür müsste jeder Nutzer einen Account erstellen, um teilzunehmen. Jeden Tag könnten die Nutzer zufällig neue Pokémon-Karten erhalten. Diese Erweiterung wurde nicht umgesetzt, da die Einbindung von Accounts eine Datenbanken erfordert, was den Einsatz von serverseitigen Technologien voraussetzen würde. Da unsere Gruppe nur geringes Wissen in diesem Bereich hatte und wir ja in den kommenden Semestern noch mehr darüber lernen werden, wurde diese Erweiterung nicht eingebaut.
+-Mehr Strecken und Personen: Weitere Strecken und Politiker könnten hinzugefügt werden, um ein breiteres Bild zu erhalten.
+-Erweiterte Vorhersage-Modelle: Der Einsatz von maschinellem Lernen könnte die Vorhersagegenauigkeit für Zugverspätungen basierend auf Wetterdaten erheblich verbessern.
+-Integrierte Push-Benachrichtigungen: Nutzer könnten Push-Benachrichtigungen erhalten, wenn auf ihrer ausgewählten Strecke Verspätungen zu erwarten sind.
+-Erweiterung auf internationale Daten: Die Integration von internationalen Wetter- und Zugdaten könnte die Analyse auf andere Länder und Bahnnetze ausweiten.
 
-## Geheime Seite
-Als besonderes Feature gibt es eine geheime Seite, die nur angezeigt wird, wenn das Memory-Spiel korrekt ausgefüllt wird. Diese Seite enthält exklusive Pokémon-Artworks und kann unter folgendem Link erreicht werden: [Geheime Seite](https://543894-12.web.fhgr.ch/pokeart.html).
 
 ## Kontakt
 Falls Sie Fragen oder Anregungen haben, können Sie uns gerne über GitHub kontaktieren:
 - Repository (API, CSS and Responsive Design): [@JuKa2023](https://github.com/JuKa2023)
-- Code (Js & CSS): [@Saurabh](https://github.com/sm-fhgr)
 - Design: [@SophiaIseli](https://github.com/SophiaIseli)
