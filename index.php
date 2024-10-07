@@ -20,7 +20,7 @@
 
 <main class="container mx-auto px-4 py-8">
     <!-- Page Title (Full Width) -->
-    <h1 class="text-4xl font-bold mb-8 w-full">Zugverspätungen und Wetterstörungen: Eine Datengeschichte</h1>
+    <h1 class="text-4xl font-bold mb-8 w-full text-center">Zugverspätungen und Wetterstörungen: Eine Datengeschichte</h1>
 
     <!-- Main Content (Responsive Width) -->
     <div class="w-full lg:w-[55%] mx-auto">
