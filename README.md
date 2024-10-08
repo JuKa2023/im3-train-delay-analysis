@@ -14,16 +14,51 @@ Dieses Projekt untersucht die Korrelation zwischen Wetterbedingungen und Zugvers
 - Prognosen: Basierend auf historischen Daten und aktuellen Wetterbedingungen werden Vorhersagen über mögliche Zugverspätungen gemacht.
 - Bilanz und Fazit: Am Ende werden Trends aufgezeigt, wann und unter welchen Bedingungen Verspätungen besonders häufig auftreten.
 
+## Verwendete Technologien und API
+- Backhend: PHP
+- Datenbank: Maria DB
+- Frontend: HTML, Tailwind, JavaScript,
+- Charts: Chart.Js
+- API
+
 ## Installation und Einrichtung
+
 1. **Repository klonen:**
-   ```bash
-   git clone https://github.com/DeinBenutzername/pokebattle.git
+
+2. Kopiere die Datei `env.sample` nach `.env`:
+   
    ```
-2. **In das Projektverzeichnis wechseln:**
-   ```bash
-   cd pokebattle
+   cp env.sample .env
+
    ```
-3. **Öffne `index.html` in deinem bevorzugten Browser.**
+   
+3. Bearbeite die Datei `.env` und trage deine Datenbankzugangsdaten ein:
+
+    ```
+   DB_HOST=localhost
+   DB_NAME=your_database_name
+   DB_USER=your_username
+   DB_PASSWORD=your_password
+   DB_ROOT_PASSWORD=your_root_password
+   ```
+    
+   Hinweis: Für die lokale Entwicklung ohne Docker verwende localhost als DB_HOST. Wenn du Docker verwendest, wird DB_HOST für die PHP-Anwendung automatisch auf mariadb gesetzt.
+
+4. If you're using Docker, you can start the application by running:
+
+   ```
+   docker-compose up -d
+   ```
+
+   This will start the PHP application, MariaDB Datenbank, and phpMyAdmin.
+
+5. Wenn du Docker nicht verwendest, stelle sicher, dass PHP und MariaDB lokal installiert sind, und passe deine MariaDB-Konfiguration so an, dass sie mit den Zugangsdaten in deiner `.env`-Datei übereinstimmt.
+
+## Datenbank setup
+Wenn du die Datenbank zum ersten mal aufsetzt:
+1. Greife auf phpMyAdmin unter `http://localhost:8081` zu
+2. Melde dich mit den Zugangsdaten aus deiner `.env`-Datei an
+3. Importiere die SQL-Datei aus dem Verzeichnis `database` (falls vorhanden)
 
 ## Nutzung
 1. **Projekt starten:**
@@ -31,9 +66,9 @@ Dieses Projekt untersucht die Korrelation zwischen Wetterbedingungen und Zugvers
 2. **Im Browser verwenden:**
    Gehe zu `http://localhost/` (sofern du einen lokalen Server verwendest, ansonsten öffne einfach die HTML-Datei direkt).
 
-## Verwendete Technologien und API
-- HTML, Tailwind, JavaScript,  Chart.Js
-- API: 
+## Datenbakstruktur
+
+
 
 ## Learnings
 - APIs integrieren und verknüpfen: Wir haben gelernt, wie man verschiedene APIs (Wetter- und Zugverspätungsdaten) nahtlos in eine Webanwendung integriert und die Daten sinnvoll kombiniert.
