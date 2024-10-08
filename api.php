@@ -1,6 +1,6 @@
 <?php
 
-$url = "https://www.freepublicapis.com/transport-api";
+$url = "https://transport.opendata.ch/v1/locations?query=Basel";
 
 // Initialisiert eine cURL-Sitzung
 $ch = curl_init($url);
@@ -14,7 +14,9 @@ $response = curl_exec($ch);
 // Schließt die cURL-Sitzung
 curl_close($ch);
 
+
+
 // Zeigt die JSON-Antwort an
-echo $response;
+print_r($response[0]);
 
 ?>

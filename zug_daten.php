@@ -2,6 +2,8 @@
 
 require_once 'db_connection.php';
 
+
+
 // Check the connection
 if (!$pdo) {
     die("Connection failed.");
@@ -42,11 +44,15 @@ function insertTrainDelay($pdo, $stationId, $trainNumber, $date, $plannedDepartu
 
 // Loop through each route and fetch data from the API
 foreach ($routes as $route) {
-    $apiUrl = "https://transport.opendata.ch/v1/connections?from=" . urlencode($route['from']) . "&to=" . urlencode($route['to']) . "&date=2023-01-01&limit=10";
+    $apiUrl = "https://transport.opendata.ch/v1/connections?from=" . urlencode($route['from']) . "&to=" . urlencode($route['to']) . "&date=2024-01-01&limit=10";
+
+    // echo $apiUrl . "<br>";
 
     // Fetch data from the API for each route
     $response = file_get_contents($apiUrl);
     $data = json_decode($response, true);
+
+    print_r($data);
 
     // Loop through the API data and insert into the database
     foreach ($data['connections'] as $connection) {
@@ -61,10 +67,10 @@ foreach ($routes as $route) {
         $actualDeparture = strtotime($arrival);
         $delayMinutes = ($actualDeparture - $plannedDeparture) / 60;
 
-        // Insert station data into `bahnhofstabelle` for the departure station
+ /*       // Insert station data into `bahnhofstabelle` for the departure station
         insertStation($pdo, $fromStation['id'], $fromStation['name'], $fromStation['location']['city']);
 
         // Insert train delay data into `zugverspaetung`
-        insertTrainDelay($pdo, $fromStation['id'], $trainNumber, date('Y-m-d', $plannedDeparture), $departure, $arrival, $delayMinutes);
+        insertTrainDelay($pdo, $fromStation['id'], $trainNumber, date('Y-m-d', $plannedDeparture), $departure, $arrival, $delayMinutes);*/
     }
 }
