@@ -14,3 +14,9 @@ p{
     font-size: 15px;
     color: #BFBFBF;
 }
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .custom-width-75 {
+        width: 75%;
+    }
+}

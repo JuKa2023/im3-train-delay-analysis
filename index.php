@@ -23,7 +23,7 @@
     <h1 class="text-4xl font-bold mb-8 w-full text-center">Zugverspätungen und Wetterstörungen: Eine Datengeschichte</h1>
 
     <!-- Main Content (Responsive Width) -->
-    <div class="w-full lg:w-[55%] mx-auto">
+    <div class="w-full lg:w-[55%] custom-width-75 mx-auto">
         <!-- Statistic Cards -->
         <article class="grid grid-cols-1 md:grid-cols-3 gap-4 my-12">
             <section class="border border-gray-100 p-6 rounded-lg relative">

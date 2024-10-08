@@ -1,7 +1,6 @@
 <?php
 
-// Create a connection to the database
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once 'db_connection.php';
 
 // Check the connection
 if ($conn->connect_error) {
@@ -11,9 +10,9 @@ if ($conn->connect_error) {
 // Define the routes to fetch data for
 $routes = [
     ['from' => 'Zurich', 'to' => 'Bern'],
-    ['from' => 'Geneva', 'to' => 'Lausanne'],
-    ['from' => 'Basel', 'to' => 'Lucerne'],
-    ['from' => 'St. Gallen', 'to' => 'Winterthur']
+    ['from' => 'Geneva', 'to' => 'Bern'],
+    ['from' => 'Lugano', 'to' => 'Bern'],
+    ['from' => 'Visp', 'to' => 'Bern']
 ];
 
 // Function to insert station data into the `bahnhofstabelle`
