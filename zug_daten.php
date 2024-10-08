@@ -3,8 +3,8 @@
 require_once 'db_connection.php';
 
 // Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!$pdo) {
+    die("Connection failed.");
 }
 
 // Define the routes to fetch data for
@@ -16,22 +16,29 @@ $routes = [
 ];
 
 // Function to insert station data into the `bahnhofstabelle`
-/*function insertStation($conn, $stationId, $stationName, $location) {
-    $sql = "INSERT INTO bahnhofstabelle (bahnhof_id, bahnhof_name, ort) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $stationId, $stationName, $location);
-    $stmt->execute();
-    $stmt->close();
+function insertStation($pdo, $stationId, $stationName, $location) {
+    $sql = "INSERT INTO bahnhofstabelle (bahnhof_id, bahnhof_name, ort) VALUES (:stationId, :stationName, :location)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':stationId' => $stationId,
+        ':stationName' => $stationName,
+        ':location' => $location,
+    ]);
 }
 
 // Function to insert train delay data into the `zugverspaetung` table
-function insertTrainDelay($conn, $stationId, $trainNumber, $date, $plannedDeparture, $actualDeparture, $delayMinutes) {
-    $sql = "INSERT INTO zugverspaetung (bahnhof_id, zugnummer, datum, plan_abfahrt, ist_abfahrt, verspaetung_minuten) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssi", $stationId, $trainNumber, $date, $plannedDeparture, $actualDeparture, $delayMinutes);
-    $stmt->execute();
-    $stmt->close();
-}*/
+function insertTrainDelay($pdo, $stationId, $trainNumber, $date, $plannedDeparture, $actualDeparture, $delayMinutes) {
+    $sql = "INSERT INTO zugverspaetung (bahnhof_id, zugnummer, datum, plan_abfahrt, ist_abfahrt, verspaetung_minuten) VALUES (:stationId, :trainNumber, :date, :plannedDeparture, :actualDeparture, :delayMinutes)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':stationId' => $stationId,
+        ':trainNumber' => $trainNumber,
+        ':date' => $date,
+        ':plannedDeparture' => $plannedDeparture,
+        ':actualDeparture' => $actualDeparture,
+        ':delayMinutes' => $delayMinutes,
+    ]);
+}
 
 // Loop through each route and fetch data from the API
 foreach ($routes as $route) {
@@ -55,15 +62,12 @@ foreach ($routes as $route) {
         $delayMinutes = ($actualDeparture - $plannedDeparture) / 60;
 
         // Insert station data into `bahnhofstabelle` for the departure station
-        insertStation($conn, $fromStation['id'], $fromStation['name'], $fromStation['location']['city']);
+        insertStation($pdo, $fromStation['id'], $fromStation['name'], $fromStation['location']['city']);
 
         // Insert train delay data into `zugverspaetung`
-        insertTrainDelay($conn, $fromStation['id'], $trainNumber, date('Y-m-d', $plannedDeparture), $departure, $arrival, $delayMinutes);
+        insertTrainDelay($pdo, $fromStation['id'], $trainNumber, date('Y-m-d', $plannedDeparture), $departure, $arrival, $delayMinutes);
     }
 }
-
-// Close the database connection
-$conn->close();
 
 echo "Data for all routes has been successfully inserted into the tables.";
 ?>
