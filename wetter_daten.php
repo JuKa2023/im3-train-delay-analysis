@@ -2,8 +2,16 @@
 // Include the database connection file
 include 'db_connection.php'; // This file should handle the database connection logic
 
+// Array of fixed locations with their latitude and longitude
+$locations = [
+    ['name' => 'Zurich', 'latitude' => 47.3769, 'longitude' => 8.5417],
+    ['name' => 'Geneva', 'latitude' => 46.2044, 'longitude' => 6.1432],
+    ['name' => 'Lugano', 'latitude' => 46.0037, 'longitude' => 8.9511],
+    ['name' => 'Visp', 'latitude' => 46.2932, 'longitude' => 7.8817],
+];
+
 // Function to fetch weather data from Open-Meteo API for the entire year of 2023
-function fetchWeatherData($latitude, $longitude, $startDate, $endDate, $conn) {
+function fetchWeatherData($latitude, $longitude, $startDate, $endDate, $locationName, $pdo) {
     // Open-Meteo API URL with query parameters for the full year
     $apiUrl = "https://api.open-meteo.com/v1/forecast?latitude={$latitude}&longitude={$longitude}&start_date={$startDate}&end_date={$endDate}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum,wind_speed_max,pressure_msl&timezone=auto";
 
@@ -23,32 +31,37 @@ function fetchWeatherData($latitude, $longitude, $startDate, $endDate, $conn) {
     $weatherData = json_decode($response, true);
 
     // Insert the weather data into the database
-    insertWeatherDataIntoDatabase($weatherData, $conn);
+    insertWeatherDataIntoDatabase($weatherData, $locationName, $pdo);
 }
 
 // Function to insert weather data into the database
-/*function insertWeatherDataIntoDatabase($weatherData, $conn) {
+function insertWeatherDataIntoDatabase($weatherData, $locationName, $pdo) {
     if (isset($weatherData['daily'])) {
         foreach ($weatherData['daily']['time'] as $index => $date) {
-            $location = 'Your_Location'; // Replace with your actual location name or dynamic data
             $temperature = $weatherData['daily']['temperature_2m_max'][$index];
             $precipitation = $weatherData['daily']['precipitation_sum'][$index];
             $windSpeed = $weatherData['daily']['wind_speed_max'][$index];
             $weatherCondition = determineWeatherCondition($temperature, $precipitation, $windSpeed); // Simple logic to categorize weather condition
 
-            // Prepare the SQL query to insert the data
+            // Prepare the SQL query to insert the data using PDO
             $sql = "INSERT INTO Wetter (ort, datum, temperatur, niederschlag, Windgeschwindigkeit, wetterzustand) 
-                    VALUES ('$location', '$date', '$temperature', '$precipitation', '$windSpeed', '$weatherCondition')";
+                    VALUES (:location, :date, :temperature, :precipitation, :windSpeed, :weatherCondition)";
 
-            // Execute the query
-            if ($conn->query($sql) === FALSE) {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+            // Execute the query using prepared statements
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':location' => $locationName,
+                ':date' => $date,
+                ':temperature' => $temperature,
+                ':precipitation' => $precipitation,
+                ':windSpeed' => $windSpeed,
+                ':weatherCondition' => $weatherCondition
+            ]);
         }
     } else {
         echo "No data available for the specified date range.";
     }
-}*/
+}
 
 // Function to determine the weather condition based on data (simple example)
 function determineWeatherCondition($temperature, $precipitation, $windSpeed) {
@@ -63,16 +76,15 @@ function determineWeatherCondition($temperature, $precipitation, $windSpeed) {
     }
 }
 
-// zu ersetzten mit den angaben der  Untersuchen Orte
-/*$latitude = "40.7128";   // Example: New York City
-$longitude = "-74.0060";*/
 $startDate = "2023-01-01";    // Start of the year 2023
 $endDate = "2023-12-31";      // End of the year 2023
 
 try {
-    // Assuming db_connection.php initializes a $conn variable for the database connection
-    fetchWeatherData($latitude, $longitude, $startDate, $endDate, $conn);
-    echo "Weather data successfully inserted into the database.";
+    // Loop through each fixed location and fetch its weather data
+    foreach ($locations as $location) {
+        fetchWeatherData($location['latitude'], $location['longitude'], $startDate, $endDate, $location['name'], $pdo);
+        echo "Weather data successfully inserted into the database for location: " . $location['name'] . "<br>";
+    }
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }

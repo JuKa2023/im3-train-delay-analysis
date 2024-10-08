@@ -68,6 +68,3 @@ foreach ($routes as $route) {
         insertTrainDelay($pdo, $fromStation['id'], $trainNumber, date('Y-m-d', $plannedDeparture), $departure, $arrival, $delayMinutes);
     }
 }
-
-echo "Data for all routes has been successfully inserted into the tables.";
-?>
