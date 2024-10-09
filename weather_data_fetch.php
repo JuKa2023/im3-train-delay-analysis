@@ -1,17 +1,45 @@
 <?php
 // Include the database connection file
 include 'db_connection.php'; // This file should handle the database connection logic
-// fetch_weather.php
 
 // Function to fetch weather data from the Open-Meteo API
-function fetchWeatherData($latitude, $longitude, $datetime) {
-    $date = new DateTime($datetime);
-    $url = $date > new DateTime()
+function fetchWeatherData($latitude, $longitude, $date) {
+    // Determine if it's a historical date or future date
+    $url = ($date > new DateTime())
         ? "https://api.open-meteo.com/v1/forecast?latitude={$latitude}&longitude={$longitude}&hourly=temperature_2m,windspeed_10m,winddirection_10m,weathercode&start_date={$date->format('Y-m-d')}&end_date={$date->format('Y-m-d')}"
         : "https://archive-api.open-meteo.com/v1/archive?latitude={$latitude}&longitude={$longitude}&start_date={$date->format('Y-m-d')}&end_date={$date->format('Y-m-d')}&hourly=temperature_2m,windspeed_10m,winddirection_10m,weathercode";
 
-    $weather_data = json_decode(file_get_contents($url), true);
-    return $weather_data;
+    // Fetch weather data
+    $response = file_get_contents($url);
+    return json_decode($response, true); // Return the decoded JSON data
+}
+
+// Define the locations (latitude and longitude)
+$locations = [
+    ['latitude' => 47.3769, 'longitude' => 8.5417, 'name' => 'Zurich'],  // Zurich coordinates
+    ['latitude' => 46.9481, 'longitude' => 7.4474, 'name' => 'Bern'],    // Bern coordinates
+    ['latitude' => 46.2044, 'longitude' => 6.1432, 'name' => 'Geneva'],  // Geneva coordinates
+    ['latitude' => 46.0037, 'longitude' => 8.9511, 'name' => 'Lugano'],  // Lugano coordinates
+    ['latitude' => 46.2919, 'longitude' => 7.8845, 'name' => 'Visp']     // Visp coordinates
+];
+
+// Initialize the start date and end date
+$date_from = new DateTime('2024-01-01');
+$date_to = new DateTime(); // Current date
+
+// Loop through each day from start date to current date
+while ($date_from <= $date_to) {
+    // Loop through each location
+    foreach ($locations as $location) {
+        // Fetch weather data for each location and date
+        $weather_data = fetchWeatherData($location['latitude'], $location['longitude'], $date_from);
+
+        // Optionally, print a message indicating the data was fetched successfully
+        echo "Weather data fetched for " . $location['name'] . " on " . $date_from->format('Y-m-d') . "<br>";
+    }
+
+    // Increment the date by one day
+    $date_from->modify('+1 day');
 }
 ?>
 
