@@ -176,3 +176,11 @@ new Chart(scatterChartCtx, {
         }
     }
 });
+
+
+// Button state active
+
+function toggleActiveState(button) {
+    // Toggle the active state by adding/removing the border color class
+    button.classList.toggle('border-blue-500');
+}

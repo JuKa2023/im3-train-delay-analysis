@@ -15,6 +15,10 @@ p{
     color: #BFBFBF;
 }
 
+.custom-border-3 {
+    border-width: 3px;
+}
+
 @media (min-width: 1024px) and (max-width: 1279px) {
     .custom-width-75 {
         width: 75%;

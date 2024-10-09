@@ -51,6 +51,29 @@
                 <p class="mt-4 text-sm">Politiker, die regelmässig nach Bern pendeln, sind oft von den gleichen Faktoren betroffen wie Zugverspätungen, insbesondere wenn sie öffentliche Verkehrsmittel nutzen oder auf Strassenverkehr angewiesen sind. Wir haben untersucht, wie sich Wetterereignisse auf die Pünktlichkeit der Pendler auswirken und ob es Muster gibt, die mit den jeweiligen Fahrtrouten zusammenhängen.</p>
                 <p class="mt-4 text-sm">In den letzten Monaten haben wir die durchschnittlichen Verspätungen von Politikern auf ihren Pendelrouten beobachtet. Insbesondere während starker Wetterereignisse gibt es auffällige Korrelationen zwischen Verspätungen und Wetterbedingungen.</p>
                 <div class="mb-10 mt-4">
+                    <div class="flex justify-center space-x-4 mb-4">
+                        <button id="toggleButton"
+                                class="bg-white text-gray-800 px-6 py-3 m-5 text-sm font-medium rounded-lg transition-transform transform hover:scale-[1.02] custom-border-3 border-transparent focus:outline-none"
+                                onclick="toggleActiveState(this)">
+                            Visp - Bern
+                        </button>
+                        <button id="toggleButton"
+                                class="bg-white text-gray-800 px-6 py-3 m-5 text-sm font-medium rounded-lg transition-transform transform hover:scale-[1.02] custom-border-3 border-transparent focus:outline-none"
+                                onclick="toggleActiveState(this)">
+                            Genf - Bern
+                        </button>
+                        <button id="toggleButton"
+                                class="bg-white text-gray-800 px-6 py-3 m-5 text-sm font-medium rounded-lg transition-transform transform hover:scale-[1.02] custom-border-3 border-transparent focus:outline-none"
+                                onclick="toggleActiveState(this)">
+                            Lugano - Bern
+                        </button>
+                        <button id="toggleButton"
+                                class="bg-white text-gray-800 px-6 py-3 m-5 text-sm font-medium rounded-lg transition-transform transform hover:scale-[1.02] custom-border-3 border-transparent focus:outline-none"
+                                onclick="toggleActiveState(this)">
+                            Zürich - Bern
+                        </button>
+                    </div>
+
                     <div class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
                         <canvas id="monthlyChart" class="w-full"></canvas>
                     </div>
