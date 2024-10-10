@@ -35,7 +35,7 @@ foreach ($jsonData['stationboard'] as $train) {
     $trainDetails[] = [
         'Train to' => $toStation,
         'Departure Station' => $departureStation,
-        'Departure' => $departureTimestamp,
+        'Departure Time Stamp' => $departureTimestamp,
         'Departure Time' => $departure,
         'Delay' => $delay,
         'Platform' => $platform,
@@ -43,8 +43,8 @@ foreach ($jsonData['stationboard'] as $train) {
 }
 
 // Display the train details using print_r()
-print_r($trainDetails);
+//print_r($trainDetails);
 
-
+return $trainDetails;
 
 ?>

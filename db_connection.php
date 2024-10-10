@@ -1,6 +1,6 @@
 <?php
-$host = getenv('DB_HOST') ?: 'localhost';
-$db   = getenv('DB_NAME') ?: 'your_database_name';
+$host = getenv('DB_HOST') ?: 'railway';
+$db   = getenv('DB_NAME') ?: 'your_database_names';
 $user = getenv('DB_USER') ?: 'your_username';
 $pass = getenv('DB_PASSWORD') ?: 'your_password';
 $charset = 'utf8mb4';
