@@ -25,16 +25,11 @@
     <!-- Main Content (Responsive Width) -->
     <div class="w-full lg:w-[55%] custom-width-75 mx-auto">
         <!-- Statistic Cards -->
-        <article class="grid grid-cols-1 md:grid-cols-3 gap-4 my-12">
+        <article class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
             <section class="border border-gray-100 p-6 rounded-lg relative">
-                <p class="text-lg font-semibold mb-2">Durchschnittliche monatliche Verspätungen</p>
+                <p class="text-lg font-semibold mb-2">Durchschnittliche wöchentliche Verspätungen</p>
                 <p class="text-3xl font-bold">66</p>
-                <p class="text-sm text-gray-400">Züge pro Monat</p>
-            </section>
-            <section class="border border-gray-100 p-6 rounded-lg relative">
-                <p class="text-lg font-semibold mb-2">Monat mit den meisten Verspätungen</p>
-                <p class="text-3xl font-bold">April</p>
-                <p class="text-sm text-gray-400">81 Verspätungen</p>
+                <p class="text-sm text-gray-400">Züge pro Woche</p>
             </section>
             <section class="border border-gray-100 p-6 rounded-lg relative">
                 <p class="text-lg font-semibold mb-2">Wetterkorrelation</p>
@@ -50,29 +45,9 @@
                 <h2 class="text-2xl font-semibold mb-4">Verständnis des Wettereinflusses auf die Pünktlichkeit der Züge</h2>
                 <p class="mt-4 text-sm">Politiker, die regelmässig nach Bern pendeln, sind oft von den gleichen Faktoren betroffen wie Zugverspätungen, insbesondere wenn sie öffentliche Verkehrsmittel nutzen oder auf Strassenverkehr angewiesen sind. Wir haben untersucht, wie sich Wetterereignisse auf die Pünktlichkeit der Pendler auswirken und ob es Muster gibt, die mit den jeweiligen Fahrtrouten zusammenhängen.</p>
                 <p class="mt-4 text-sm">In den letzten Monaten haben wir die durchschnittlichen Verspätungen von Politikern auf ihren Pendelrouten beobachtet. Insbesondere während starker Wetterereignisse gibt es auffällige Korrelationen zwischen Verspätungen und Wetterbedingungen.</p>
+
+                <h3 class="text-xl font-semibold mb-4">Zugverspätungen und Wetterstörungen von den Zügen ab Bern</h3>
                 <div class="mb-10 mt-4">
-                    <div class="flex justify-center space-x-4 mb-4">
-                        <button id="toggleButton"
-                                class="bg-white text-gray-800 px-6 py-3 m-5 text-sm font-medium rounded-lg transition-transform transform hover:scale-[1.02] custom-border-3 border-transparent focus:outline-none"
-                                onclick="toggleActiveState(this)">
-                            Visp - Bern
-                        </button>
-                        <button id="toggleButton"
-                                class="bg-white text-gray-800 px-6 py-3 m-5 text-sm font-medium rounded-lg transition-transform transform hover:scale-[1.02] custom-border-3 border-transparent focus:outline-none"
-                                onclick="toggleActiveState(this)">
-                            Genf - Bern
-                        </button>
-                        <button id="toggleButton"
-                                class="bg-white text-gray-800 px-6 py-3 m-5 text-sm font-medium rounded-lg transition-transform transform hover:scale-[1.02] custom-border-3 border-transparent focus:outline-none"
-                                onclick="toggleActiveState(this)">
-                            Lugano - Bern
-                        </button>
-                        <button id="toggleButton"
-                                class="bg-white text-gray-800 px-6 py-3 m-5 text-sm font-medium rounded-lg transition-transform transform hover:scale-[1.02] custom-border-3 border-transparent focus:outline-none"
-                                onclick="toggleActiveState(this)">
-                            Zürich - Bern
-                        </button>
-                    </div>
 
                     <div class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
                         <canvas id="monthlyChart" class="w-full"></canvas>
@@ -84,23 +59,6 @@
                 <p class="mt-4 text-sm">Diese monatliche Analyse zeigt, dass es eine klare Korrelation zwischen Wetterstörungen und Zugverspätungen gibt. Monate mit hohen Wetterstörungen verzeichneten auch die höchsten Verspätungsraten, was darauf hindeutet, dass Wetterereignisse einen erheblichen Einfluss auf die Pünktlichkeit der Züge haben.</p>
             </section>
 
-            <!-- April Bar Chart Section -->
-            <section class="mt-4">
-                <h3 class="text-2xl font-semibold mb-4">April: Ein Monat mit hohen Störungen</h3>
-                <p class="mt-4 text-sm"> Der April ist besonders hervorzuheben, da in diesem Monat eine signifikant hohe Anzahl von Verspätungen auftrat, die direkt mit Wetterereignissen in Verbindung stehen. Vor allem an bestimmten Tagen gab es hohe Abweichungen von der geplanten Ankunftszeit in Bern.</p>
-                <div class="mb-10 mt-4">
-                    <div class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
-                        <canvas id="aprilChart" class="w-full h-80"></canvas>
-                    </div>
-                    <p class="text-15px">Dieses Balkendiagramm zeigt die täglichen Zugverspätungen und Wetterstörungen im April.</p>
-                </div>
-                <h4 class="text-xl font-semibold mb-4">Wichtige Erkenntnisse aus den April Daten</h4>
-                <p class="mt-4 text-sm">Die höchste Anzahl von Verspätungen (95) trat am 8. April auf, was mit dem Tag der meisten Wetterstörungen (18) zusammenfiel.
-                    Es gab mehrere Tage mit überdurchschnittlichen Verspätungen (mehr als 81), was darauf hindeutet, dass die hohe monatliche Gesamtzahl nicht auf ein einzelnes extremes Ereignis zurückzuführen war.
-                    Wetterstörungen variierten von Tag zu Tag erheblich, von 4 bis 18 Vorfällen.
-                    Die Daten zeigen eine klare Korrelation zwischen Tagen mit hohen Wetterstörungen und erhöhten Zugverspätungen.</p>
-                <p class="mt-4 text-sm">Diese detaillierte Ansicht des Aprils zeigt, dass der Monat zwar insgesamt eine hohe Anzahl von Verspätungen und Wetterstörungen aufwies, diese jedoch nicht gleichmäßig verteilt waren. Stattdessen gab es bestimmte Tage mit besonders hohen Vorfällen, wahrscheinlich aufgrund schwerer Wetterereignisse. Diese Informationen können wertvoll sein für die Planung und Umsetzung gezielter Strategien zur Minderung von Verspätungen während Hochrisikozeiträumen.</p>
-            </section>
 
             <!-- Scatter Chart Section -->
             <section class="mt-4">
