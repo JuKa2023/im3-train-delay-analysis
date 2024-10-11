@@ -1,48 +1,50 @@
 <?php
-
 // Include the database connection file
 require_once 'config.php';
 
-// Read the weather data from the JSON file
-$weather_data = file_get_contents('weather_data.json');
+require_once 'weather_data_fetch.php'; // Include the weather data fetch file
 
-// Decode the JSON data into a PHP array
-$current_weather = json_decode($weather_data, true);
+// Fetch the current weather data by including the fetch file
+$weather_data = fetchCurrentWeatherData(46.948832, 7.439136); // Call the function directly
+
+// Debugging: Check the content of the response
+var_dump($weather_data); // See what is returned here
 
 // Check if the weather data was properly decoded
-if ($current_weather) {
-    // Map the data to variables for database insertion
-    $temperature_celsius = $current_weather['temperature'];
-    $wind_speed = $current_weather['windspeed'];
-    $weather_code = $current_weather['weathercode']; // Map weather codes to conditions if necessary
-    $rain = isset($current_weather['precipitation']) ? $current_weather['precipitation'] : 0;
+if (!is_array($weather_data) || isset($weather_data['error'])) {
+    echo "Error fetching weather data: " . ($weather_data['error'] ?? 'Unknown error');
+    exit; // Exit if there is an error
+}
 
-    // Insert data into the database
-    try {
-        // Establish a new PDO instance with the config from config.php
-        $pdo = new PDO($dsn, $username, $password, $options);
+// Map the data to variables for database insertion
+$temperature_celsius = $weather_data['current']['temperature_2m'];
+$wind_speed = $weather_data['current']['wind_speed_10m'];
+$weather_code = $weather_data['current']['weather_code']; // Adjust according to your API's response
+$rain = $weather_data['current']['rain'] ?? 0; // Use null coalescing operator for optional data
 
-        // SQL query with placeholders for inserting data
-        $sql = "INSERT INTO weather_data (location, temperature_celsius, wind_speed, rain, weather_code) 
-                VALUES (?, ?, ?, ?, ?)";
+// Insert data into the database
+try {
+    // Establish a new PDO instance with the config from config.php
+    $pdo = new PDO($dsn, $username, $password, $options);
 
-        // Prepare the SQL statement
-        $stmt = $pdo->prepare($sql);
+    // SQL query with placeholders for inserting data
+    $sql = "INSERT INTO weather_data (location, temperature_celsius, wind_speed, rain, weather_code) 
+            VALUES (?, ?, ?, ?, ?)";
 
-        // Execute the prepared statement with the mapped weather data
-        $stmt->execute([
-            'Bern', // Assuming 'Bern' as the location
-            $temperature_celsius,
-            $wind_speed,
-            $rain,
-            $weather_code
-        ]);
+    // Prepare the SQL statement
+    $stmt = $pdo->prepare($sql);
 
-        echo "Weather data successfully inserted into the database.";
-    } catch (PDOException $e) {
-        die("Could not connect to the database: " . $e->getMessage());
-    }
-} else {
-    echo "Failed to decode weather data.";
+    // Execute the prepared statement with the mapped weather data
+    $stmt->execute([
+        'Bern', // Assuming 'Bern' as the location
+        $temperature_celsius,
+        $wind_speed,
+        $rain,
+        $weather_code
+    ]);
+
+    echo "Weather data successfully inserted into the database.";
+} catch (PDOException $e) {
+    die("Could not connect to the database: " . $e->getMessage());
 }
 ?>
