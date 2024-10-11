@@ -42,9 +42,6 @@ foreach ($jsonData['stationboard'] as $train) {
     ];
 }
 
-// Display the train details using print_r()
-//print_r($trainDetails);
-
+// Return the full array of train details
 return $trainDetails;
-
 ?>
