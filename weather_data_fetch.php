@@ -1,7 +1,6 @@
 <?php
 // Include the database connection file
-include 'db_connection.php'; // This file should handle the database connection logic
-
+include 'config.php'; 
 // Function to fetch current weather data from the Open-Meteo API
 function fetchCurrentWeatherData($latitude, $longitude) {
     // Construct the API URL for current weather

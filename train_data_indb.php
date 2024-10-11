@@ -1,45 +1,54 @@
 <?php
 
-require_once 'db_connection.php'; // Ensure this is your PDO connection file
+// Include your transform script if needed
+$jsonData = include('230_transform.php');
 
-$trainDetails = require 'train_data_fetch.php'; // Assuming this returns an array of train details
+// Decode the JSON data into an array
+$trainDetails = json_decode($jsonData, true);
 
-//print_r($trainDetails); // For debugging purposes
+// Include the database connection file
+require_once 'config.php';
 
-// Assuming $trainDetails is the array with train data as processed from the previous code
-foreach ($trainDetails as $train) {
-    $departureTimestamp = $train['Departure Time Stamp'];
-    $platform = $train['Platform'];
+try {
+    // Establish PDO connection using the config file details
+    $pdo = new PDO($dsn, $username, $password, $options);
 
-    // Check if the entry already exists in the database
-    $stmt = $pdo->prepare("SELECT id FROM stationtable WHERE departure_time_stamp = ? AND platform = ?");
-    $stmt->execute([$departureTimestamp, $platform]);
+    // Process each train detail and insert it into the database if not exists
+    foreach ($trainDetails as $train) {
+        $departureTimestamp = $train['Departure Time Stamp'];
+        $platform = $train['Platform'];
 
-    // If no record is found, insert the new data
-    if ($stmt->rowCount() == 0) {
-        // Prepare the insert statement
-        $insertStmt = $pdo->prepare("
-            INSERT INTO stationtable (destination, departure, departure_time_stamp, departure_time, delay, platform)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ");
+        // Check if the entry already exists in the database
+        $stmt = $pdo->prepare("SELECT id FROM stationtable WHERE departure_time_stamp = ? AND platform = ?");
+        $stmt->execute([$departureTimestamp, $platform]);
 
-        // Execute the insertion
-        if ($insertStmt->execute([
-            $train['Train to'],
-            $train['Departure Station'],
-            $departureTimestamp,
-            $train['Departure Time'],
-            $train['Delay'],
-            $platform
-        ])) {
-            echo "New record inserted successfully.\n";
+        // If no record is found, insert the new data
+        if ($stmt->rowCount() == 0) {
+            // Prepare the insert statement
+            $insertStmt = $pdo->prepare("
+                INSERT INTO stationtable (destination, departure, departure_time_stamp, departure_time, delay, platform)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ");
+
+            // Execute the insertion
+            if ($insertStmt->execute([
+                $train['Train to'],
+                $train['Departure Station'],
+                $departureTimestamp,
+                $train['Departure Time'],
+                $train['Delay'],
+                $platform
+            ])) {
+                echo "New record inserted successfully for train to " . $train['Train to'] . ".\n";
+            } else {
+                echo "Error inserting record for train to " . $train['Train to'] . ": " . implode(":", $insertStmt->errorInfo()) . "\n";
+            }
         } else {
-            echo "Error inserting record: " . implode(":", $insertStmt->errorInfo()) . "\n";
+            echo "Record with departure timestamp $departureTimestamp and platform $platform already exists.\n";
         }
-    } else {
-        echo "Record with departure timestamp $departureTimestamp and platform $platform already exists.\n";
     }
+} catch (PDOException $e) {
+    die("Verbindung zur Datenbank konnte nicht hergestellt werden: " . $e->getMessage());
 }
 
-// No need to close the connection manually, as PDO will handle it when the script ends
 ?>
