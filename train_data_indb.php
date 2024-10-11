@@ -1,10 +1,7 @@
 <?php
 
 // Include your transform script if needed
-$jsonData = include('230_transform.php');
-
-// Decode the JSON data into an array
-$trainDetails = json_decode($jsonData, true);
+$jsonData = include('train_data_fetch.php');
 
 // Include the database connection file
 require_once 'config.php';
