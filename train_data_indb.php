@@ -31,7 +31,7 @@ try {
             if ($insertStmt->execute([
                 $train['Train to'],
                 $train['Departure Station'],
-                $departureTimestamp ['Departure Time Stamp'],
+                $train ['Departure Time Stamp'],
                 $train['Departure Time'],
                 $train['Delay'],
                 $platform
@@ -47,5 +47,7 @@ try {
 } catch (PDOException $e) {
     die("Verbindung zur Datenbank konnte nicht hergestellt werden: " . $e->getMessage());
 }
+
+
 
 ?>
