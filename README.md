@@ -23,55 +23,14 @@ Dieses Projekt untersucht die Korrelation zwischen Wetterbedingungen und Zugvers
 
 ## Installation und Einrichtung
 
-1. **Repository klonen:**
 
-2. Kopiere die Datei `env.sample` nach `.env`:
-   
-   ```
-   cp env.sample .env
-
-   ```
-   
-3. Bearbeite die Datei `.env` und trage deine Datenbankzugangsdaten ein:
-
-    ```
-   DB_HOST=localhost
-   DB_NAME=your_database_name
-   DB_USER=your_username
-   DB_PASSWORD=your_password
-   DB_ROOT_PASSWORD=your_root_password
-   ```
-    
-   Hinweis: Für die lokale Entwicklung ohne Docker verwende localhost als DB_HOST. Wenn du Docker verwendest, wird DB_HOST für die PHP-Anwendung automatisch auf mariadb gesetzt.
-
-4. If you're using Docker, you can start the application by running:
-
-   ```
-   docker-compose up -d
-   ```
-
-   This will start the PHP application, MariaDB Datenbank, and phpMyAdmin.
-
-5. Wenn du Docker nicht verwendest, stelle sicher, dass PHP und MariaDB lokal installiert sind, und passe deine MariaDB-Konfiguration so an, dass sie mit den Zugangsdaten in deiner `.env`-Datei übereinstimmt.
-
-## Datenbank setup
-Wenn du die Datenbank zum ersten mal aufsetzt:
-1. Greife auf phpMyAdmin unter `http://localhost:8081` zu
-2. Melde dich mit den Zugangsdaten aus deiner `.env`-Datei an
-3. Importiere die SQL-Datei aus dem Verzeichnis `database` (falls vorhanden)
-
-## Nutzung
-1. **Projekt starten:**
-   Öffne `index.html` in deinem bevorzugten Browser.
-2. **Im Browser verwenden:**
-   Gehe zu `http://localhost/` (sofern du einen lokalen Server verwendest, ansonsten öffne einfach die HTML-Datei direkt).
 
 ## Datenbakstruktur
 
-
+- Das Projekt verwendet eine simple Datenbankstruktur mit zwei Tabellen, eine Tabelle für das Sammeln des Wetters und eine für das Sammeln jeglicher Züge, die in Bern am Anschlagbrett angezeigt werden. Diese Datenbanken sollen in Regelmässigen abständen befüllt werden durch die API, hierfür werden die Wetter Daten ale 5 Minuten aus der API herausgezogen und alle 15 Minuten aus der Zug API.
 
 ## Learnings
-- APIs integrieren und verknüpfen: Wir haben gelernt, wie man verschiedene APIs (Wetter- und Zugverspätungsdaten) nahtlos in eine Webanwendung integriert und die Daten sinnvoll kombiniert.
+- APIs integrieren und verknüpfen: Wir haben gelernt, wie man APIs untersucht und welche Tücken sie mitbringen können, wie man verschiedene APIs (Wetter- und Zugverspätungsdaten) nahtlos in eine Webanwendung integriert und die Daten sinnvoll kombiniert, wann es Sinn macht Daten vorab in eine Datenbank zu speichern.
 - Datenanalyse und Visualisierung: Einblicke in die Korrelation von Wetterbedingungen und Verspätungen auf den Strecken wurden durch statistische Auswertungen und die Visualisierung der Ergebnisse gewonnen.
 - Benutzerzentrierte Gestaltung: Wir haben den Fokus darauf gelegt, die Anwendung für den Benutzer einfach und interaktiv zu gestalten.
 
