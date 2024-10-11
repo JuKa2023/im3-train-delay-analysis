@@ -31,7 +31,7 @@ try {
             if ($insertStmt->execute([
                 $train['Train to'],
                 $train['Departure Station'],
-                $departureTimestamp,
+                $departureTimestamp ['Departure Time Stamp'],
                 $train['Departure Time'],
                 $train['Delay'],
                 $platform
