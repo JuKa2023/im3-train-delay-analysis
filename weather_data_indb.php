@@ -4,6 +4,7 @@ require_once 'config.php';
 
 require_once 'weather_data_fetch.php'; // Include the weather data fetch file
 
+$Bern = 'Bern'; // Assuming 'Bern' as the location
 // Fetch the current weather data by including the fetch file
 $weather_data = fetchCurrentWeatherData(46.948832, 7.439136); // Call the function directly
 
@@ -31,15 +32,15 @@ try {
     $pdo = new PDO($dsn, $username, $password, $options);
 
     // SQL query with placeholders for inserting data
-    $sql = "INSERT INTO weather_data (location, temperature_celsius, wind_speed, rain, weather_code) 
-            VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO weather_data (location, temperature_celsius, wind_speed, rain, weather_code, showers, snowfall, wind_gusts_10m) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Prepare the SQL statement
     $stmt = $pdo->prepare($sql);
 
     // Execute the prepared statement with the mapped weather data
     $stmt->execute([
-        'Bern', // Assuming 'Bern' as the location
+        $Bern, // Assuming 'Bern' as the location
         $temperature_celsius,
         $wind_speed,
         $rain,
