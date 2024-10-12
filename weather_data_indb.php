@@ -16,11 +16,14 @@ if (!is_array($weather_data) || isset($weather_data['error'])) {
     exit; // Exit if there is an error
 }
 
-// Map the data to variables for database insertion
-$temperature_celsius = $weather_data['current']['temperature_2m'];
-$wind_speed = $weather_data['current']['wind_speed_10m'];
-$weather_code = $weather_data['current']['weather_code']; // Adjust according to your API's response
-$rain = $weather_data['current']['rain'] ?? 0; // Use null coalescing operator for optional data
+// Map the data to variables for database insertion, Use null coalescing operator for optional data
+$temperature_celsius = $weather_data['current']['temperature_2m'] ?? 0; 
+$wind_speed = $weather_data['current']['wind_speed_10m'] ?? 0; 
+$weather_code = $weather_data['current']['weather_code'] ?? 0;
+$rain = $weather_data['current']['rain'] ?? 0; 
+$showers = $weather_data['current']['showers'] ?? 0; 
+$snowfall = $weather_data['current']['snowfall'] ?? 0;  
+$wind_gusts = $weather_data['current']['wind_gusts_10m'] ?? 0; 
 
 // Insert data into the database
 try {
@@ -40,7 +43,10 @@ try {
         $temperature_celsius,
         $wind_speed,
         $rain,
-        $weather_code
+        $weather_code,
+        $showers,
+        $snowfall,
+        $wind_gusts
     ]);
 
     echo "Weather data successfully inserted into the database.";
