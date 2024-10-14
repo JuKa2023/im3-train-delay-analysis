@@ -98,6 +98,11 @@ function createChart(type) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    top: 10,
+                    bottom: 10
+                }},
             scales: {
                 x: {
                     display: true,
