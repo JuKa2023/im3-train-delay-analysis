@@ -6,6 +6,9 @@ $trainDetails = include('train_data_fetch.php');  // This fetches the full array
 // Include the database connection file
 require_once 'config.php';
 
+// Initialize an array to store the response
+$response = [];
+
 try {
     // Establish PDO connection using the config file details
     $pdo = new PDO($dsn, $username, $password, $options);
@@ -17,6 +20,20 @@ try {
 
         // Only attempt to insert valid timestamps
         if ($departureTimestamp !== 'No departure timestamp') {
+            // Skip if the departure time is in the past
+            $departureTimestampUtc = gmdate('Y-m-d H:i:s', $departureTimestamp);
+            $currentTimestamp = gmdate('Y-m-d H:i:s', time());
+            if ($departureTimestampUtc < $currentTimestamp) {
+                $response[] = [
+                    "status" => "skipped",
+                    "train_to" => $train['Train to'],
+                    "message" => "Departure time is in the past",
+                    "departure_timestamp" => $departureTimestampUtc,
+                    "current_timestamp" => $currentTimestamp
+                ];
+                continue;
+            }
+
             // Check if the entry already exists in the database
             $stmt = $pdo->prepare("SELECT id FROM stationtable WHERE departure_time_stamp = ? AND platform = ?");
             $stmt->execute([$departureTimestamp, $platform]);
@@ -38,18 +55,61 @@ try {
                     $train['Delay'],
                     $platform
                 ])) {
-                    echo "New record inserted successfully for train to " . $train['Train to'] . ".\n";
+                    $response[] = [
+                        "status" => "success",
+                        "train_to" => $train['Train to'],
+                        "message" => "New record inserted successfully"
+                    ];
                 } else {
-                    echo "Error inserting record for train to " . $train['Train to'] . ": " . implode(":", $insertStmt->errorInfo()) . "\n";
+                    $response[] = [
+                        "status" => "error",
+                        "train_to" => $train['Train to'],
+                        "message" => "Error inserting record",
+                        "error_info" => $insertStmt->errorInfo()
+                    ];
                 }
-            } else {
-                echo "Record with departure timestamp $departureTimestamp and platform $platform already exists.\n";
+            } else { 
+                // Record exists, update the delay
+                $updateStmt = $pdo->prepare("
+                    UPDATE stationtable 
+                    SET delay = ?
+                    WHERE departure_time_stamp = ? AND platform = ?
+                ");
+
+                // Execute the update
+                if ($updateStmt->execute([$train['Delay'], $departureTimestamp, $platform])) {
+                    $response[] = [
+                        "status" => "updated",
+                        "train_to" => $train['Train to'],
+                        "message" => "Record updated successfully",
+                        "new_delay" => $train['Delay']
+                    ];
+                } else {
+                    $response[] = [
+                        "status" => "error",
+                        "train_to" => $train['Train to'],
+                        "message" => "Error updating delay",
+                        "error_info" => $updateStmt->errorInfo()
+                    ];
+                }
             }
         } else {
-            echo "Invalid departure timestamp for train to " . $train['Train to'] . ".\n";
+            $response[] = [
+                "status" => "error",
+                "train_to" => $train['Train to'],
+                "message" => "Invalid departure timestamp"
+            ];
         }
     }
 } catch (PDOException $e) {
-    die("Verbindung zur Datenbank konnte nicht hergestellt werden: " . $e->getMessage());
+    $response = [
+        "status" => "error",
+        "message" => "Connection to the database could not be established",
+        "error_info" => $e->getMessage()
+    ];
 }
+
+// Output the response as JSON
+header('Content-Type: application/json');
+echo json_encode($response, JSON_PRETTY_PRINT);
 ?>
