@@ -18,90 +18,119 @@
 
 <body class="bg-gray-900 text-gray-100">
 
-<main class="container mx-auto px-4 py-8">
-    <!-- Page Title (Full Width) -->
-    <h1 class="text-4xl font-bold mb-8 w-full text-center">Zugverspätungen und Wetterstörungen: Eine Datengeschichte</h1>
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Title (Full Width) -->
+        <h1 class="text-4xl font-bold mb-8 w-full text-center">Zugverspätungen und Wetterstörungen: Eine Datengeschichte
+        </h1>
 
-    <!-- Main Content (Responsive Width) -->
-    <div class="w-full lg:w-[55%] custom-width-75 mx-auto">
-        <!-- Statistic Cards -->
-        <article class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
-            <section class="border border-gray-100 p-6 rounded-lg relative">
-                <p class="text-lg font-semibold mb-2">Durchschnittliche wöchentliche Verspätungen</p>
-                <p class="text-3xl font-bold">66</p>
-                <p class="text-sm text-gray-400">Züge pro Woche</p>
-            </section>
-            <section class="border border-gray-100 p-6 rounded-lg relative">
-                <p class="text-lg font-semibold mb-2">Wetterkorrelation</p>
-                <p class="text-3xl font-bold">73%</p>
-                <p class="text-sm text-gray-400">wetterbedingte Verspätungen</p>
-            </section>
-            <section class="border border-gray-100 p-6 rounded-lg relative">
-                <p class="text-lg font-semibold mb-2">Durchschnittlich schlechtes wetter</p>
-                <p class="text-3xl font-bold">2</p>
-                <p class="text-sm text-gray-400"> Tage pro Woche</p>
-            </section>
-        </article>
+        <!-- Main Content (Responsive Width) -->
+        <div class="w-full lg:w-[55%] custom-width-75 mx-auto">
+            <!-- Statistic Cards -->
+            <article class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
+                <section class="border border-gray-100 p-6 rounded-lg relative">
+                    <p class="text-lg font-semibold mb-2">Durchschnittliche wöchentliche Verspätungen</p>
+                    <p class="text-3xl font-bold">66</p>
+                    <p class="text-sm text-gray-400">Züge pro Woche</p>
+                </section>
+                <section class="border border-gray-100 p-6 rounded-lg relative">
+                    <p class="text-lg font-semibold mb-2">Wetterkorrelation</p>
+                    <p class="text-3xl font-bold">73%</p>
+                    <p class="text-sm text-gray-400">wetterbedingte Verspätungen</p>
+                </section>
+                <section class="border border-gray-100 p-6 rounded-lg relative">
+                    <p class="text-lg font-semibold mb-2">Durchschnittlich schlechtes wetter</p>
+                    <p class="text-3xl font-bold">2</p>
+                    <p class="text-sm text-gray-400"> Tage pro Woche</p>
+                </section>
+            </article>
 
-        <article>
+            <article>
 
-        <!-- Monthly Line Chart Section -->
-            <section class="mt-4">
-                <h2 class="text-2xl font-semibold mb-4">Verständnis des Wettereinflusses auf die Pünktlichkeit der Züge</h2>
-                <p class="mt-4 text-sm">Politiker, die regelmässig nach Bern pendeln, sind oft von den gleichen Faktoren betroffen wie Zugverspätungen, insbesondere wenn sie öffentliche Verkehrsmittel nutzen oder auf Strassenverkehr angewiesen sind. Wir haben untersucht, wie sich Wetterereignisse auf die Pünktlichkeit der Pendler auswirken und ob es Muster gibt, die mit den jeweiligen Fahrtrouten zusammenhängen.</p>
-                <p class="mt-4 text-sm">In den letzten Monaten haben wir die durchschnittlichen Verspätungen von Politikern auf ihren Pendelrouten beobachtet. Insbesondere während starker Wetterereignisse gibt es auffällige Korrelationen zwischen Verspätungen und Wetterbedingungen.</p>
+                <!-- Monthly Line Chart Section -->
+                <section class="mt-4">
+                    <h2 class="text-2xl font-semibold mb-4">Verständnis des Wettereinflusses auf die Pünktlichkeit der
+                        Züge</h2>
+                    <p class="mt-4 text-sm">Politiker, die regelmässig nach Bern pendeln, sind oft von den gleichen
+                        Faktoren betroffen wie Zugverspätungen, insbesondere wenn sie öffentliche Verkehrsmittel nutzen
+                        oder auf Strassenverkehr angewiesen sind. Wir haben untersucht, wie sich Wetterereignisse auf
+                        die Pünktlichkeit der Pendler auswirken und ob es Muster gibt, die mit den jeweiligen
+                        Fahrtrouten zusammenhängen.</p>
+                    <p class="mt-4 text-sm">In den letzten Monaten haben wir die durchschnittlichen Verspätungen von
+                        Politikern auf ihren Pendelrouten beobachtet. Insbesondere während starker Wetterereignisse gibt
+                        es auffällige Korrelationen zwischen Verspätungen und Wetterbedingungen.</p>
 
-                <h3 class="text-xl font-semibold mb-4">Zugverspätungen und Wetterstörungen von den Zügen ab Bern</h3>
-                
-                <div class="mb-10 mt-4">
-                    <div class="relative inline-block text-left mb-4">
-                        <button id="dropdownButton" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center" type="button">
-                            <!-- The button text will be set dynamically -->
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div id="dropdownMenu" class="origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
-                            <div id="dropdownMenuItems" class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
-                                <!-- Menu items will be inserted here dynamically -->
+                    <h3 class="text-xl font-semibold mb-4">Zugverspätungen und Wetterstörungen von den Zügen ab Bern
+                    </h3>
+                    <div class="mb-10 mt-4 relative">
+                        <!-- Chart Container -->
+                        <div class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02] z-10 relative">
+                            <!-- Dropdown Menu Inside Chart Container -->
+                            <div class="absolute top-2 right-2 z-50">
+                                <div class="relative inline-block text-left">
+                                    <button id="dropdownButton" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1 inline-flex items-center" type="button">
+                                        <!-- The button text will be set dynamically -->
+                                    </button>
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdownMenu" class="origin-top-right absolute right-0 mt-2 min-w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                                        <div id="dropdownMenuItems" class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
+                                            <!-- Menu items will be inserted here dynamically -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- Canvas for the Chart -->
+                            <canvas id="myChart" class="w-full"></canvas>
                         </div>
+
+                        <!-- Description Paragraph with an ID -->
+                        <p id="chartDescription" class="text-15px">Dieses Diagramm zeigt die Beziehung zwischen
+                            Zugverspätungen und Wetterstörungen.</p>
                     </div>
 
-                    <div class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
-                        <canvas id="myChart" class="w-full"></canvas>
+                    <h4 class="text-xl font-semibold mb-4">Wichtige Erkenntnisse</h4>
+                    <p class="mt-4 text-sm">März und April verzeichneten die höchste Anzahl an Zugverspätungen, was mit
+                        einer Zunahme der Wetterstörungen zusammenfiel. Wetterbedingte Störungen erreichten im Februar
+                        ihren Höhepunkt, wahrscheinlich aufgrund der Winterbedingungen. Juni zeigte die niedrigste
+                        Anzahl sowohl an Verspätungen als auch an Wetterstörungen, was auf einen verbesserten Service in
+                        den Sommermonaten hindeutet.</p>
+                    <p class="mt-4 text-sm">Diese monatliche Analyse zeigt, dass es eine klare Korrelation zwischen
+                        Wetterstörungen und Zugverspätungen gibt. Monate mit hohen Wetterstörungen verzeichneten auch
+                        die höchsten Verspätungsraten, was darauf hindeutet, dass Wetterereignisse einen erheblichen
+                        Einfluss auf die Pünktlichkeit der Züge haben.</p>
+                </section>
+
+
+                <!-- Scatter Chart Section -->
+                <section class="mt-4">
+                    <h2 class="text-2xl font-semibold mb-4">Korrelation zwischen Wetter und Verspätungen</h2>
+                    <p class="mt-4 text-sm">Unsere Analyse zeigt eine starke Korrelation zwischen Wetterstörungen und
+                        Zugverspätungen. Im Durchschnitt beobachteten wir für jede wetterbedingte Störung einen Anstieg
+                        von 4-6 Zugverspätungen.</p>
+                    <div class="mb-10 mt-4">
+                        <div
+                            class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
+                            <canvas id="scatterChart" class="w-full h-full"></canvas>
+                        </div>
+                        <p class="text-15px">Dieses Streudiagramm veranschaulicht die Korrelation zwischen
+                            Wetterstörungen und Zugverspätungen.</p>
                     </div>
-                    <p id="chartDescription" class="text-15px">Auf diesem Diagramm wird die Verspätung in Verbindung zum Zeitraum gesetzt.</p>
-                </div>
+                </section>
+            </article>
 
-                <h4 class="text-xl font-semibold mb-4">Wichtige Erkenntnisse</h4>
-                <p class="mt-4 text-sm">März und April verzeichneten die höchste Anzahl an Zugverspätungen, was mit einer Zunahme der Wetterstörungen zusammenfiel. Wetterbedingte Störungen erreichten im Februar ihren Höhepunkt, wahrscheinlich aufgrund der Winterbedingungen. Juni zeigte die niedrigste Anzahl sowohl an Verspätungen als auch an Wetterstörungen, was auf einen verbesserten Service in den Sommermonaten hindeutet.</p>
-                <p class="mt-4 text-sm">Diese monatliche Analyse zeigt, dass es eine klare Korrelation zwischen Wetterstörungen und Zugverspätungen gibt. Monate mit hohen Wetterstörungen verzeichneten auch die höchsten Verspätungsraten, was darauf hindeutet, dass Wetterereignisse einen erheblichen Einfluss auf die Pünktlichkeit der Züge haben.</p>
-            </section>
+            <!-- Conclusion Section -->
+            <article class="mb-10">
+                <h2 class="text-2xl font-semibold mb-4">Fazit</h2>
+                <p class="mt-4 text-sm">This data story highlights the significant impact of weather on train
+                    punctuality. By understanding these patterns,
+                    rail services can better prepare for and mitigate the effects of weather-related disruptions,
+                    ultimately improving
+                    the reliability of train schedules for passengers.</p>
+            </article>
+        </div>
+    </main>
 
-
-            <!-- Scatter Chart Section -->
-            <section class="mt-4">
-                <h2 class="text-2xl font-semibold mb-4">Korrelation zwischen Wetter und Verspätungen</h2>
-                <p class="mt-4 text-sm">Unsere Analyse zeigt eine starke Korrelation zwischen Wetterstörungen und Zugverspätungen. Im Durchschnitt beobachteten wir für jede wetterbedingte Störung einen Anstieg von 4-6 Zugverspätungen.</p>
-                <div class="mb-10 mt-4">
-                    <div class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
-                        <canvas id="scatterChart" class="w-full h-full"></canvas>
-                    </div>
-                    <p class="text-15px">Dieses Streudiagramm veranschaulicht die Korrelation zwischen Wetterstörungen und Zugverspätungen.</p>
-                </div>
-            </section>
-        </article>
-
-        <!-- Conclusion Section -->
-        <article class="mb-10">
-            <h2 class="text-2xl font-semibold mb-4">Fazit</h2>
-            <p class="mt-4 text-sm">This data story highlights the significant impact of weather on train punctuality. By understanding these patterns,
-                rail services can better prepare for and mitigate the effects of weather-related disruptions, ultimately improving
-                the reliability of train schedules for passengers.</p>
-        </article>
-    </div>
-</main>
-
-<script src="./src/scripts.js"></script>
+    <script src="./src/scripts.js"></script>
 
 </body>
 

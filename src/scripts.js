@@ -66,7 +66,7 @@ function createChart(type) {
         labels = weeklyData.map(data => data.woche);
         dataVerspaetungen = weeklyData.map(data => data.verspaetungen);
         dataWetterstoerungen = weeklyData.map(data => data.wetterstoerungen);
-        chartType = 'bar';
+        chartType = 'line';
     } else if (type === 'daily') {
         labels = dailyData.map(data => data.tag);
         dataVerspaetungen = dailyData.map(data => data.verspaetungen);
@@ -99,10 +99,39 @@ function createChart(type) {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-                x: { display: true },
-                y: { display: true }
+                x: {
+                    display: true,
+                    ticks: {
+                        color: '#E6E6E6' // Set the color of the x-axis labels
+                    },
+                    grid: {
+                        color: '#3C3C3C' // Set the color of the x-axis grid lines
+                    },
+                    border: {
+                        color: '#BFBFBF' // Set the color of the x-axis line
+                    }
+                },
+                y: {
+                    display: true,
+                    ticks: {
+                        color: '#BFBFBF' // Set the color of the y-axis labels
+                    },
+                    grid: {
+                        color: '#3C3C3C' // Set the color of the y-axis grid lines
+                    },
+                    border: {
+                        color: '#BFBFBF' // Set the color of the y-axis line
+                    }
+                }
             },
             plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        color: '#E6E6E6' // Set the color of the legend text
+                    }
+                },
                 tooltip: {
                     backgroundColor: '#3C3C3C',
                     titleColor: '#E6E6E6',
@@ -121,6 +150,9 @@ function createChart(type) {
     dropdownButton.innerHTML = `${selectedOption.label} <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
     </svg>`;
+
+    // Set the dropdown menu width to match the button
+    setDropdownWidth();
 
     // Update the dropdown menu items
     updateDropdownMenu(type);
@@ -149,6 +181,14 @@ function updateDropdownMenu(selectedType) {
             dropdownMenuItems.appendChild(menuItem);
         }
     });
+}
+
+// Function to set the dropdown menu width
+function setDropdownWidth() {
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const buttonWidth = dropdownButton.offsetWidth;
+    dropdownMenu.style.width = buttonWidth + 'px';
 }
 
 // Initial Chart Load
@@ -204,16 +244,19 @@ new Chart(scatterChartCtx, {
                 },
                 grid: {
                     drawOnChartArea: false,
-                    color: '#E6E6E6',
+                    color: '#3C3C3C',
                     borderColor: '#E6E6E6',
                     drawBorder: true,
                     drawTicks: true
+                },
+                border: {
+                    color: '#E6E6E6'
                 }
             },
             y: {
                 title: {
                     display: true,
-                    text: 'Anzahl Verpätete Züge',
+                    text: 'Anzahl Verspätete Züge',
                     color: '#E6E6E6'
                 },
                 ticks: {
@@ -226,6 +269,9 @@ new Chart(scatterChartCtx, {
                     borderColor: '#E6E6E6',
                     drawBorder: true,
                     drawTicks: true
+                },
+                border: {
+                    color: '#E6E6E6'
                 }
             }
         },
@@ -252,9 +298,7 @@ new Chart(scatterChartCtx, {
     }
 });
 
-
 // Button state active
-
 function toggleActiveState(button) {
     // Toggle the active state by adding/removing the border color class
     button.classList.toggle('border-blue-500');
