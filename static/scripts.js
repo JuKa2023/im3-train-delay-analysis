@@ -188,6 +188,7 @@ function setDropdownWidth() {
     const dropdownButton = document.getElementById('dropdownButton');
     const dropdownMenu = document.getElementById('dropdownMenu');
 
+    // Calculate the width based on the longest word
     let longestWord = '';
     chartOptions.forEach(option => {
         if (option.label.length > longestWord.length) {
