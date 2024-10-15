@@ -72,14 +72,16 @@ async function createChart(type) {
                     data: dataVerspaetungen,
                     borderColor: '#5F94D7',
                     backgroundColor: chartType === 'line' ? 'transparent' : '#5F94D7',
-                    fill: false
+                    fill: false,
+                    yAxisID: 'y' // This dataset will use the left y-axis
                 },
                 {
                     label: 'Wetterstörungen',
                     data: dataWetterstoerungen,
                     borderColor: '#8C238C',
                     backgroundColor: chartType === 'line' ? 'transparent' : '#8C238C',
-                    fill: false
+                    fill: false,
+                    yAxisID: 'y1' // This dataset will use the right y-axis
                 }
             ]
         },
@@ -106,7 +108,9 @@ async function createChart(type) {
                     }
                 },
                 y: {
+                    type: 'linear', // Linear scale for the left y-axis
                     display: true,
+                    position: 'left', // Left side
                     ticks: {
                         color: '#BFBFBF' // Set the color of the y-axis labels
                     },
@@ -115,6 +119,20 @@ async function createChart(type) {
                     },
                     border: {
                         color: '#BFBFBF' // Set the color of the y-axis line
+                    }
+                },
+                y1: {
+                    type: 'linear', // Linear scale for the right y-axis
+                    display: true,
+                    position: 'right', // Right side
+                    ticks: {
+                        color: '#BFBFBF' // Set the color of the right y-axis labels (same as left)
+                    },
+                    grid: {
+                        drawOnChartArea: false, // No grid lines for the right y-axis (optional)
+                    },
+                    border: {
+                        color: '#BFBFBF' // Set the color of the right y-axis line
                     }
                 }
             },
@@ -228,7 +246,10 @@ window.addEventListener('click', function (event) {
     }
 });
 
-// Fetch Combined Data for Scatter Chart and create chart
+
+
+
+
 // Fetch Combined Data for Scatter Chart and create chart
 async function createScatterChart() {
     const combinedData = await fetchCombinedData();
