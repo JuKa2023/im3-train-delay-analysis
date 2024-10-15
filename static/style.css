@@ -19,6 +19,10 @@ p{
     border-width: 3px;
 }
 
+.active-item {
+    background-color: #F0F0F0;
+}
+
 @media (min-width: 1024px) and (max-width: 1279px) {
     .custom-width-75 {
         width: 75%;

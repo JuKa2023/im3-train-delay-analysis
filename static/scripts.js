@@ -158,22 +158,28 @@ function updateDropdownMenu(selectedType) {
     // Clear existing menu items
     dropdownMenuItems.innerHTML = '';
 
-    // Create menu items excluding the selected type
+    // Create menu items including the selected type
     chartOptions.forEach(option => {
-        if (option.type !== selectedType) {
-            const menuItem = document.createElement('a');
-            menuItem.href = '#';
-            menuItem.setAttribute('data-chart-type', option.type);
-            menuItem.className = 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100';
-            menuItem.role = 'menuitem';
-            menuItem.innerText = option.label;
-            menuItem.addEventListener('click', function (e) {
-                e.preventDefault();
-                createChart(option.type);
-                dropdownMenu.classList.add('hidden');
-            });
-            dropdownMenuItems.appendChild(menuItem);
+        const menuItem = document.createElement('a');
+        menuItem.href = '#';
+        menuItem.setAttribute('data-chart-type', option.type);
+        menuItem.className = 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100';
+        menuItem.role = 'menuitem';
+        menuItem.innerText = option.label;
+
+        // Apply active style if this is the selected type (light gray background)
+        if (option.type === selectedType) {
+            menuItem.classList.add('active-item'); // Add light gray background to the selected chart type
         }
+
+        // Add click event listener to switch charts when clicking the option
+        menuItem.addEventListener('click', function (e) {
+            e.preventDefault();
+            createChart(option.type);  // Re-create chart with the selected type
+            dropdownMenu.classList.add('hidden'); // Close the dropdown after selection
+        });
+
+        dropdownMenuItems.appendChild(menuItem);
     });
 }
 
@@ -181,8 +187,25 @@ function updateDropdownMenu(selectedType) {
 function setDropdownWidth() {
     const dropdownButton = document.getElementById('dropdownButton');
     const dropdownMenu = document.getElementById('dropdownMenu');
-    const buttonWidth = dropdownButton.offsetWidth;
-    dropdownMenu.style.width = buttonWidth + 'px';
+
+    let longestWord = '';
+    chartOptions.forEach(option => {
+        if (option.label.length > longestWord.length) {
+            longestWord = option.label;
+        }
+    });
+
+    // Create an invisible span to measure the width of the longest word
+    const testSpan = document.createElement('span');
+    testSpan.innerText = longestWord;
+    testSpan.style.visibility = 'hidden'; // Make it invisible
+    document.body.appendChild(testSpan);
+    const longestWordWidth = testSpan.offsetWidth;
+    document.body.removeChild(testSpan);
+
+    // Set the width of both the button and dropdown to match the longest word
+    dropdownButton.style.width = `${longestWordWidth + 50}px`; // Add some padding
+    dropdownMenu.style.width = `${longestWordWidth + 50}px`;
 }
 
 // Initial Chart Load
