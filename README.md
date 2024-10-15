@@ -27,7 +27,7 @@ Dieses Projekt untersucht die Korrelation zwischen Wetterbedingungen und Zugvers
 
 ## Datenbakstruktur
 
-- Das Projekt verwendet eine simple Datenbankstruktur mit zwei Tabellen, eine Tabelle für das Sammeln des Wetters und eine für das Sammeln jeglicher Züge, die in Bern am Anschlagbrett angezeigt werden. Diese Datenbanken sollen in Regelmässigen abständen befüllt werden durch die API, hierfür werden die Wetter Daten ale 5 Minuten aus der API herausgezogen und alle 15 Minuten aus der Zug API.
+- Das Projekt verwendet eine simple Datenbankstruktur mit zwei Tabellen, eine Tabelle für das Sammeln des Wetters und eine für das Sammeln jeglicher Züge, die in Bern am Anschlagbrett angezeigt werden. Diese Datenbanken sollen in Regelmässigen abständen befüllt werden durch die API, hierfür werden die Wetter Daten ale 5 Minuten aus der API herausgezogen und alle 10 Minuten aus der Zug API.
 
 ## Learnings
 - APIs integrieren und verknüpfen: Wir haben gelernt, wie man APIs untersucht und welche Tücken sie mitbringen können, wie man verschiedene APIs (Wetter- und Zugverspätungsdaten) nahtlos in eine Webanwendung integriert und die Daten sinnvoll kombiniert, wann es Sinn macht Daten vorab in eine Datenbank zu speichern.
@@ -40,14 +40,14 @@ Dieses Projekt untersucht die Korrelation zwischen Wetterbedingungen und Zugvers
 - Technische Komplexität: Die Echtzeitverarbeitung von Wetter- und Zugdaten stellte besondere Anforderungen an die Architektur und die Performance der Anwendung.
 
 ## Benutzte Ressourcen
-Zur Vorbereitung auf den Kurs schauten wir verschiedene Tutorials auf [YouTube](https://www.youtube.com/) oder Mini-Kurse auf der Seite [Coursera](https://www.coursera.org/). Auf beiden Seiten haben wir Tutorials spezifisch zur Einbindung von APIs sowie zur schlauen Entwicklung und Integration von Animationen gefunden. Dies ermöglichte uns, sofort in das Projekt einzusteigen, und diente uns ebenfalls als Quelle bei Unklarheiten.
+Zur Vorbereitung auf den Kurs schauten wir verschiedene Tutorials auf [YouTube](https://www.youtube.com/). Auf beiden Seiten haben wir Tutorials spezifisch zur Einbindung von APIs sowie zur schlauen Entwicklung und Integration von Animationen gefunden. Dies ermöglichte uns, sofort in das Projekt einzusteigen, und diente uns ebenfalls als Quelle bei Unklarheiten.
 
-Während der Entwicklung stiessen wir auf technische Herausforderungen. In solchen Fällen griffen wir auf die Notizen aus dem Unterricht zurück. Wenn uns das Kursmaterial nicht weiterhalf, kontaktierten wir [ChatGPT](https://chat.openai.com/c/0c86d02e-cf73-4878-8671-4585188888fa), um Lösungen für Codeprobleme zu finden und uns bei Unklarheiten in der Programmierung zu unterstützen. Diese Vorgehensweise trug wesentlich zur Effizienz und Qualität des Entwicklungsprozesses bei. Natürlich gab es auch immer wieder Punkte, wo wir lieber auf menschliche Hilfe zurückgreifen wollten. In diesen Fällen erhielten wir Unterstützung durch unsere Dozenten oder Freunde, die in der Programmierwelt eingebettet sind.
+Während der Entwicklung stiessen wir auf technische Herausforderungen. In solchen Fällen griffen wir auf die Notizen aus dem Unterricht zurück. Wenn uns das Kursmaterial nicht weiterhalf, griffen wir auf [ChatGPT](https://chat.openai.com/c/0c86d02e-cf73-4878-8671-4585188888fa) und [W3Schools](https://www.w3schools.com/php/default.asp) zurück, um Lösungen für Codeprobleme zu finden und uns bei Unklarheiten in der Programmierung zu unterstützen. Diese Vorgehensweise trug wesentlich zur Effizienz und Qualität des Entwicklungsprozesses bei. Natürlich gab es auch immer wieder Punkte, wo wir lieber auf menschliche Hilfe zurückgreifen wollten. In diesen Fällen erhielten wir Unterstützung durch unsere Dozenten oder Freunde, die in der Programmierwelt eingebettet sind.
 
 Für Design-Inspirationen haben wir häufig die Seite CodePen [CodePen](https://codepen.io/) genutzt. Diese Plattform erfordert jedoch eine gewisse Menge an Fachjargon und Vorwissen, um die gewünschten Ergebnisse zu finden. Es ist wichtig, klar anzugeben, mit welchen Technologien man arbeitet und ob man bestimmte Frameworks verwendet oder nicht, um relevante und nützliche Beispiele zu finden.
 
 ## Erweiterungsmöglichkeiten
-- Mehr Strecken und Personen: Weitere Strecken und Politiker könnten hinzugefügt werden, um ein breiteres Bild zu erhalten.
+- Mehr Strecken und Personen: Weitere Bahnhöfe könnten hinzugefügt werden, um ein breiteres Bild zu erhalten.
 - Erweiterte Vorhersage-Modelle: Der Einsatz von maschinellem Lernen könnte die Vorhersagegenauigkeit für Zugverspätungen basierend auf Wetterdaten erheblich verbessern.
 - Integrierte Push-Benachrichtigungen: Nutzer könnten Push-Benachrichtigungen erhalten, wenn auf ihrer ausgewählten Strecke Verspätungen zu erwarten sind.
 - Erweiterung auf internationale Daten: Die Integration von internationalen Wetter- und Zugdaten könnte die Analyse auf andere Länder und Bahnnetze ausweiten.
