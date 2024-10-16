@@ -6,32 +6,32 @@ try {
     // Establish PDO connection using the config file details
     $pdo = new PDO($dsn, $username, $password, $options);
 
-    $interval = isset($_GET['interval']) ? $_GET['interval'] : 'monthly'; 
+    // Get the resolution parameter from GET request
+    $resolution = isset($_GET['resolution']) ? $_GET['resolution'] : 'daily';
 
-    // Set the SQL interval based on the selected time frame
-    switch ($interval) {
-        case 'daily':
-            $timeInterval = '1 DAY'; // Last 24 hours
-            break;
-        case 'weekly':
-            $timeInterval = '7 DAY'; // Last 7 days
-            break;
-        case 'monthly':
-        default:
-            $timeInterval = '32 DAY'; // Last 32 days
-            break;
+    // Set the time interval and group by clause based on resolution
+    if ($resolution === 'hourly') {
+        $timeInterval = '24 HOUR';
+        $groupBy = 'DATE(departure_time), HOUR(departure_time)';
+        $dateFormat = 'DATE_FORMAT(departure_time, "%Y-%m-%d %H:00:00")';
+        $weatherDateFormat = 'DATE_FORMAT(timestamp, "%Y-%m-%d %H:00:00")';
+    } else {
+        $timeInterval = '30 DAY';
+        $groupBy = 'DATE(departure_time)';
+        $dateFormat = 'DATE(departure_time)';
+        $weatherDateFormat = 'DATE(timestamp)';
     }
 
     // Query to fetch train data
     $trainStmt = $pdo->prepare("
         SELECT 
-            DATE(departure_time) as date,
+            {$dateFormat} as date,
             COUNT(id) as total_trains,
             SUM(delay > 0) as total_delays,
             AVG(delay) as avg_delay
         FROM stationtable
-        WHERE departure_time >= NOW() - $timeInterval
-        GROUP BY DATE(departure_time)
+        WHERE departure_time >= NOW() - INTERVAL {$timeInterval}
+        GROUP BY {$groupBy}
         ORDER BY date ASC
     ");
     $trainStmt->execute();
@@ -40,7 +40,7 @@ try {
     // Query to fetch weather data and calculate disruption score
     $weatherStmt = $pdo->prepare("
         SELECT 
-            DATE(timestamp) as date,
+            {$weatherDateFormat} as date,
             AVG(temperature_celsius) as avg_temperature,
             AVG(wind_speed) as avg_wind_speed,
             AVG(rain) as avg_rain,
@@ -48,10 +48,10 @@ try {
             AVG(snowfall) as avg_snowfall,
             AVG(wind_gusts_10m) as avg_wind_gusts,
             AVG(weather_code) as avg_weather_code,
-            (AVG(wind_speed) * 0.4 + AVG(wind_gusts_10m) * 0.3 + AVG(rain) * 0.2 + AVG(showers) * 0.2 + AVG(snowfall) * 0.3) AS disruption_score
+            (AVG(wind_speed) * 0.4 + AVG(wind_gusts_10m) * 0.5 + AVG(rain) * 0.2 + AVG(showers) * 0.2 + AVG(snowfall) * 0.3) AS disruption_score
         FROM weather_data
-        WHERE timestamp >= NOW() - $timeInterval
-        GROUP BY DATE(timestamp)
+        WHERE timestamp >= NOW() - INTERVAL {$timeInterval}
+        GROUP BY {$weatherDateFormat}
         ORDER BY date ASC
     ");
     $weatherStmt->execute();

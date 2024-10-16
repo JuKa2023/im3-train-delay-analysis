@@ -17,8 +17,8 @@ const ctx = document.getElementById('myChart').getContext('2d');
 let chart;
 
 // Fetch Combined Train and Weather Data
-async function fetchCombinedData() {
-    const response = await fetch('api.php?interval=${interval}');
+async function fetchCombinedData(resolution = 'daily') {
+    const response = await fetch(`api.php?resolution=${resolution}`);
     const combinedData = await response.json();
 
     // Preprocess combined data if necessary
@@ -41,7 +41,8 @@ async function createChart(type) {
 
     let labels, dataVerspaetungen, dataWetterstoerungen, chartType;
 
-    const combinedData = await fetchCombinedData();
+    // Fetch data based on chart type
+    const combinedData = await fetchCombinedData(type === 'daily' ? 'hourly' : 'daily');
 
     // Prepare the data according to the chart type
     if (type === 'monthly') {
@@ -55,10 +56,13 @@ async function createChart(type) {
         dataWetterstoerungen = combinedData.map(data => data.disruption_score);
         chartType = 'line';
     } else if (type === 'daily') {
-        labels = combinedData.map(data => data.date);
+        labels = combinedData.map(data => {
+            const date = new Date(data.date);
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        });
         dataVerspaetungen = combinedData.map(data => data.total_delays);
         dataWetterstoerungen = combinedData.map(data => data.disruption_score);
-        chartType = 'bar';
+        chartType = 'line'; // Changed from 'bar' to 'line'
     }
 
     // Create new chart
@@ -71,7 +75,7 @@ async function createChart(type) {
                     label: 'Zugverspätungen',
                     data: dataVerspaetungen,
                     borderColor: '#5F94D7',
-                    backgroundColor: chartType === 'line' ? 'transparent' : '#5F94D7',
+                    backgroundColor: 'transparent', // Changed to always be transparent for line charts
                     fill: false,
                     yAxisID: 'y' // This dataset will use the left y-axis
                 },
@@ -79,7 +83,7 @@ async function createChart(type) {
                     label: 'Wetterstörungen',
                     data: dataWetterstoerungen,
                     borderColor: '#8C238C',
-                    backgroundColor: chartType === 'line' ? 'transparent' : '#8C238C',
+                    backgroundColor: 'transparent', // Changed to always be transparent for line charts
                     fill: false,
                     yAxisID: 'y1' // This dataset will use the right y-axis
                 }
@@ -171,32 +175,33 @@ async function createChart(type) {
 }
 
 // Function to update the dropdown menu
-// Function to update the dropdown menu
 function updateDropdownMenu(selectedType) {
     const dropdownMenuItems = document.getElementById('dropdownMenuItems');
-    dropdownMenuItems.innerHTML = ''; // Clear existing menu items
+    // Clear existing menu items
+    dropdownMenuItems.innerHTML = '';
 
-    // Create menu items for each option in chartOptions
+    // Create menu items including the selected type
     chartOptions.forEach(option => {
         const menuItem = document.createElement('a');
         menuItem.href = '#';
         menuItem.setAttribute('data-chart-type', option.type);
         menuItem.className = 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100';
+        menuItem.role = 'menuitem';
         menuItem.innerText = option.label;
 
-        // Highlight the selected option
+        // Apply active style if this is the selected type (light gray background)
         if (option.type === selectedType) {
-            menuItem.classList.add('active-item');
+            menuItem.classList.add('active-item'); // Add light gray background to the selected chart type
         }
 
-        // Add click event listener to update chart when clicking an option
+        // Add click event listener to switch charts when clicking the option
         menuItem.addEventListener('click', function (e) {
             e.preventDefault();
-            createChart(option.type);  // Update chart with selected type (daily, weekly, monthly)
+            createChart(option.type);  // Re-create chart with the selected type
             dropdownMenu.classList.add('hidden'); // Close the dropdown after selection
         });
 
-        dropdownMenuItems.appendChild(menuItem); // Add menu item to dropdown
+        dropdownMenuItems.appendChild(menuItem);
     });
 }
 
