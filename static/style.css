@@ -2,11 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Krub:wght@400;500;700&display=swap');
 
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Kaisei Decol', serif;
 }
 
-p{
+p {
     font-family: 'Krub', sans-serif;
 }
 
@@ -21,10 +26,4 @@ p{
 
 .active-item {
     background-color: #F0F0F0;
-}
-
-@media (min-width: 1024px) and (max-width: 1279px) {
-    .custom-width-75 {
-        width: 75%;
-    }
 }
