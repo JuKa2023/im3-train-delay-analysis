@@ -18,7 +18,7 @@ let chart;
 
 // Fetch Combined Train and Weather Data
 async function fetchCombinedData() {
-    const response = await fetch('api.php');
+    const response = await fetch('api.php?interval=${interval}');
     const combinedData = await response.json();
 
     // Preprocess combined data if necessary
@@ -171,33 +171,32 @@ async function createChart(type) {
 }
 
 // Function to update the dropdown menu
+// Function to update the dropdown menu
 function updateDropdownMenu(selectedType) {
     const dropdownMenuItems = document.getElementById('dropdownMenuItems');
-    // Clear existing menu items
-    dropdownMenuItems.innerHTML = '';
+    dropdownMenuItems.innerHTML = ''; // Clear existing menu items
 
-    // Create menu items including the selected type
+    // Create menu items for each option in chartOptions
     chartOptions.forEach(option => {
         const menuItem = document.createElement('a');
         menuItem.href = '#';
         menuItem.setAttribute('data-chart-type', option.type);
         menuItem.className = 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100';
-        menuItem.role = 'menuitem';
         menuItem.innerText = option.label;
 
-        // Apply active style if this is the selected type (light gray background)
+        // Highlight the selected option
         if (option.type === selectedType) {
-            menuItem.classList.add('active-item'); // Add light gray background to the selected chart type
+            menuItem.classList.add('active-item');
         }
 
-        // Add click event listener to switch charts when clicking the option
+        // Add click event listener to update chart when clicking an option
         menuItem.addEventListener('click', function (e) {
             e.preventDefault();
-            createChart(option.type);  // Re-create chart with the selected type
+            createChart(option.type);  // Update chart with selected type (daily, weekly, monthly)
             dropdownMenu.classList.add('hidden'); // Close the dropdown after selection
         });
 
-        dropdownMenuItems.appendChild(menuItem);
+        dropdownMenuItems.appendChild(menuItem); // Add menu item to dropdown
     });
 }
 

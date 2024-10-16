@@ -6,6 +6,22 @@ try {
     // Establish PDO connection using the config file details
     $pdo = new PDO($dsn, $username, $password, $options);
 
+    $interval = isset($_GET['interval']) ? $_GET['interval'] : 'monthly'; 
+
+    // Set the SQL interval based on the selected time frame
+    switch ($interval) {
+        case 'daily':
+            $timeInterval = '1 DAY'; // Last 24 hours
+            break;
+        case 'weekly':
+            $timeInterval = '7 DAY'; // Last 7 days
+            break;
+        case 'monthly':
+        default:
+            $timeInterval = '32 DAY'; // Last 32 days
+            break;
+    }
+
     // Query to fetch train data
     $trainStmt = $pdo->prepare("
         SELECT 
@@ -14,7 +30,7 @@ try {
             SUM(delay > 0) as total_delays,
             AVG(delay) as avg_delay
         FROM stationtable
-        WHERE departure_time >= NOW() - INTERVAL 30 DAY
+        WHERE departure_time >= NOW() - $timeInterval
         GROUP BY DATE(departure_time)
         ORDER BY date ASC
     ");
@@ -34,7 +50,7 @@ try {
             AVG(weather_code) as avg_weather_code,
             (AVG(wind_speed) * 0.4 + AVG(wind_gusts_10m) * 0.3 + AVG(rain) * 0.2 + AVG(showers) * 0.2 + AVG(snowfall) * 0.3) AS disruption_score
         FROM weather_data
-        WHERE timestamp >= NOW() - INTERVAL 30 DAY
+        WHERE timestamp >= NOW() - $timeInterval
         GROUP BY DATE(timestamp)
         ORDER BY date ASC
     ");
