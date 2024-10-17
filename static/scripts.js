@@ -162,7 +162,7 @@ async function createChart(type) {
                     },
                     border: {
                         color: '#BFBFBF' // Set the color of the x-axis line
-                    }
+                    },
                 },
                 y: {
                     type: 'linear', // Linear scale for the left y-axis
@@ -177,6 +177,8 @@ async function createChart(type) {
                     border: {
                         color: '#BFBFBF' // Set the color of the y-axis line
                     }
+
+
                 },
                 y1: {
                     type: 'linear', // Linear scale for the right y-axis
@@ -190,7 +192,7 @@ async function createChart(type) {
                     },
                     border: {
                         color: '#BFBFBF' // Set the color of the right y-axis line
-                    }
+                    },
                 }
             },
             plugins: {
@@ -384,6 +386,13 @@ async function createScatterChart() {
                 }
             },
             plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        color: '#E6E6E6' // Set the color of the legend text
+                    }
+                },
                 tooltip: {
                     backgroundColor: '#3C3C3C',
                     titleColor: '#E6E6E6',
@@ -406,7 +415,6 @@ async function createScatterChart() {
         }
     });
 }
-
 // Call the function to create the scatter chart
 createScatterChart();
 
