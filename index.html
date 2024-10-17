@@ -16,15 +16,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="bg-gray-900 text-gray-100">
+<body class="bg-gray-900 text-gray-100 mb-10 mt-10">
 
     <main class="container mx-auto px-4 py-8">
         <!-- Page Title (Full Width) -->
-        <h1 class="text-4xl font-bold mb-8 w-full text-center">Zugverspätungen und Wetterstörungen: Eine Datengeschichte
+        <h1 class="text-4xl font-bold mb-16 w-full text-center">Zugverspätungen und Wetterstörungen: Eine
+            Datengeschichte
         </h1>
 
         <!-- Main Content (Responsive Width) -->
-        <div class="w-full lg:w-[55%] mx-auto">
+        <div id="bug1fix" class="w-full lg:w-[55%] mx-auto mb-16">
             <!-- Statistic Cards -->
             <article class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
                 <section class="border border-gray-100 p-6 rounded-lg relative">
@@ -50,7 +51,7 @@
             <article>
 
                 <!-- Monthly Line Chart Section -->
-                <section class="mt-4">
+                <section>
                     <h2 class="text-2xl font-semibold mb-4">Verständnis des Wettereinflusses auf die Pünktlichkeit der
                         Züge</h2>
                     <p class="mt-4 text-sm">Jeden Tag pendeln tausende von Menschen nach Bern und wieder zurück an ihren
@@ -62,7 +63,8 @@
                         untersucht. Insbesondere wurde ein Auge auf stärkere Wetterereignisse geworfen, um potenzielle
                         Korrelationen zwischen Verspätungen und Wetterbedingungen zu erkennen.</p>
 
-                    <h3 class="text-xl font-semibold mb-4">Zugverspätungen und Wetterstörungen von den Zügen ab Bern
+                    <h3 class="text-xl font-semibold mt-8 mb-4">Zugverspätungen und Wetterstörungen von den Zügen ab
+                        Bern
                     </h3>
                     <p class="mt-4 text-sm">Die Wetterstörungen werden durch einen "Störungsindex" dargestellt, der
                         Faktoren wie Wind, Regen, Schnee und Sturmböen kombiniert. Je höher der Index, desto stärker
@@ -107,7 +109,7 @@
                             Zugverspätungen und Wetterstörungen.</p>
                     </div>
 
-                    <h4 class="text-xl font-semibold mb-4">Wichtige Erkenntnisse</h4>
+                    <h4 class="text-xl font-semibold mt-8 mb-4">Wichtige Erkenntnisse</h4>
                     <p class="mt-4 text-sm">In den letzten 24 Stunden können Spitzen bei Zugverspätungen und
                         Wetterstörungen beobachtet werden, insbesondere zu bestimmten Zeiten, wie z.B. in den frühen
                         Morgenstunden.</p>
@@ -127,14 +129,14 @@
 
 
                 <!-- Scatter Chart Section -->
-                <section class="mt-4">
-                    <h2 class="text-2xl font-semibold mb-4">Korrelation zwischen Wetter und Verspätungen</h2>
+                <section>
+                    <h2 class="text-2xl font-semibold mt-14 mb-4">Korrelation zwischen Wetter und Verspätungen</h2>
                     <p class="mt-4 text-sm">Wir nehmen an, dass bei sehr starken Wetterausschlägen die Züge eher
                         verspätet sind. Bei leichten Wetterstörungen, scheint die Korrelation nur sehr bedingt.</p>
                     <div class="mb-10 mt-4">
                         <div
                             class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
-                            <canvas id="scatterChart" class="w-full h-full"></canvas>
+                            <canvas id="scatterChart" class=""></canvas>
                         </div>
                         <p class="text-15px">Dieses Streudiagramm veranschaulicht eine mögliche Korrelation zwischen
                             Wetterstörungen und Zugverspätungen.</p>
@@ -143,8 +145,8 @@
             </article>
 
             <!-- Conclusion Section -->
-            <article class="mb-10">
-                <h2 class="text-2xl font-semibold mb-4">Fazit</h2>
+            <article>
+                <h2 class="text-2xl font-semibold mt-14 mb-4">Fazit</h2>
                 <p class="mt-4 text-sm">Trotz der Annahme, dass Wetterbedingungen wie starker Wind, Regen oder Schnee zu
                     Zugverspätungen führen, zeigen unsere aktuellen Daten keine signifikante Korrelation zwischen
                     Wetterstörungen und Verspätungen. Während an sechs Tagen pro Woche eher schlechtes Wetter herrschte,

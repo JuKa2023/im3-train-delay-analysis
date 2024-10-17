@@ -3,6 +3,9 @@
 ## Kurzbeschreibung des Projekts
 Dieses Projekt untersucht die Korrelation zwischen Wetterbedingungen und Zugverspätungen auf bestimmten Strecken in der Schweiz. Die Route dreier Ständeräte – Lisa Mazzone (Genf-Bern), Ruedi Noser (Zürich-Bern) und Marianne Maret (Visp-Bern) – dient als Grundlage. Mithilfe von Wetterdaten (Meteo API) und Zugverspätungsinformationen (SBB API) analysieren wir, ob und wie stark das Wetter (z. B. Regen, Schnee) die Verspätungen beeinflusst. Nutzer können die Route eines Politikers auswählen, aktuelle sowie prognostizierte Zugverspätungen anzeigen lassen und eine Bilanz über häufige Verspätungen ziehen.
 
+## Bugs
+- Skalierungsproblem bei der Screen grösse zwischen zwischen 1050px und 1262px angewant auf die Breite der  statistics am Anfangd er Webseite.
+
 ## Autoren
 - [@JuKa2023](https://github.com/JuKa2023)
 - [@SophiaIseli](https://github.com/SophiaIseli)
@@ -10,8 +13,7 @@ Dieses Projekt untersucht die Korrelation zwischen Wetterbedingungen und Zugvers
 ## Features
 - Live Wetterdaten: Nutzung einer Meteo API, um aktuelle Wetterinformationen zu erhalten (Regen, Schnee, Temperatur, etc.).
 - Zugverspätungs-Analyse: Mithilfe der SBB API werden die aktuellen Verspätungen der Züge auf den ausgewählten Strecken abgerufen.
-- Interaktive Visualisierung: Nutzer können zwischen drei verschiedenen Strecken wählen (Genf-Bern, Zürich-Bern, Visp-Bern) und sich die entsprechenden Wetter- und Verspätungsdaten anzeigen lassen.
-- Prognosen: Basierend auf historischen Daten und aktuellen Wetterbedingungen werden Vorhersagen über mögliche Zugverspätungen gemacht.
+- Interaktive Visualisierung: Nutzer können zwischen drei verschiedenen ansichten wählen um die entwicklungd er Verspätung auf die letzten 14 Stunden, 7 Tage und 1 Monat
 - Bilanz und Fazit: Am Ende werden Trends aufgezeigt, wann und unter welchen Bedingungen Verspätungen besonders häufig auftreten.
 
 ## Verwendete Technologien und API
@@ -20,10 +22,6 @@ Dieses Projekt untersucht die Korrelation zwischen Wetterbedingungen und Zugvers
 - Frontend: HTML, Tailwind, JavaScript,
 - Charts: Chart.Js
 - API
-
-## Installation und Einrichtung
-
-
 
 ## Datenbakstruktur
 

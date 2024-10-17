@@ -329,6 +329,11 @@ window.addEventListener('click', function (event) {
 
 // Fetch Combined Data for Scatter Chart and create chart
 async function createScatterChart() {
+
+    if (chart) {
+        chart.destroy();
+    }
+
     const combinedData = await fetchCombinedData();
 
     // Preprocess the data to calculate percentage of delayed trains
@@ -347,15 +352,22 @@ async function createScatterChart() {
                 data: processedData,
                 backgroundColor: '#D60001',
                 borderColor: '#D60001',
-                pointRadius: 10
+                pointRadius: 10,
+                fill: false,
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: true,
+            layout: {
+                padding: {
+                    top: 10,
+                    bottom: 10
+                }
+            },
             scales: {
                 x: {
-                    type: 'linear',
+                    display: true,
                     title: {
                         display: true,
                         text: 'Störfaktor',
@@ -363,7 +375,6 @@ async function createScatterChart() {
                     },
                     ticks: {
                         color: '#E6E6E6',
-                        padding: 10
                     },
                     grid: {
                         color: '#3C3C3C',  // Add this to include grid lines
@@ -376,6 +387,8 @@ async function createScatterChart() {
                     }
                 },
                 y: {
+                    type: 'linear',
+                    display: true,
                     title: {
                         display: true,
                         text: 'Prozentual Verspätete Züge (%)',
@@ -383,7 +396,7 @@ async function createScatterChart() {
                     },
                     ticks: {
                         color: '#E6E6E6',
-                        padding: 10
+
                     },
                     grid: {
                         color: '#3C3C3C',  // Add this to include grid lines
