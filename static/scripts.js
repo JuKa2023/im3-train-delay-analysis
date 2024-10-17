@@ -352,7 +352,7 @@ async function createScatterChart() {
                 data: processedData,
                 backgroundColor: '#D60001',
                 borderColor: '#D60001',
-                pointRadius: 10,
+                pointRadius: 5,
                 fill: false,
             }]
         },
