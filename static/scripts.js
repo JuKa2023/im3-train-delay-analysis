@@ -327,24 +327,22 @@ window.addEventListener('click', function (event) {
 
 
 
-// Fetch Combined Data for Scatter Chart and create chart
-async function createScatterChart() {
+let scatterChart;
 
-    if (chart) {
-        chart.destroy();
+async function createScatterChart() {
+    if (scatterChart) {
+        scatterChart.destroy();
     }
 
     const combinedData = await fetchCombinedData();
 
-    // Preprocess the data to calculate percentage of delayed trains
     const processedData = combinedData.map(data => ({
-        x: data.disruption_score, // Keep disruption score as the x-axis
-        y: (data.total_delays / data.total_trains) * 100  // Calculate percentage of delayed trains
+        x: data.disruption_score,
+        y: (data.total_delays / data.total_trains) * 100
     }));
 
-    // Create the scatter chart after data is fetched and processed
     const scatterChartCtx = document.getElementById('scatterChart').getContext('2d');
-    new Chart(scatterChartCtx, {
+    scatterChart = new Chart(scatterChartCtx, {
         type: 'scatter',
         data: {
             datasets: [{
@@ -358,7 +356,7 @@ async function createScatterChart() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false, // Change this to false for better resizing
             layout: {
                 padding: {
                     top: 10,
@@ -377,7 +375,7 @@ async function createScatterChart() {
                         color: '#E6E6E6',
                     },
                     grid: {
-                        color: '#3C3C3C',  // Add this to include grid lines
+                        color: '#3C3C3C',
                         borderColor: '#BFBFBF',
                         drawBorder: true,
                         drawTicks: true
@@ -396,10 +394,9 @@ async function createScatterChart() {
                     },
                     ticks: {
                         color: '#E6E6E6',
-
                     },
                     grid: {
-                        color: '#3C3C3C',  // Add this to include grid lines
+                        color: '#3C3C3C',
                         borderColor: '#BFBFBF',
                         drawBorder: true,
                         drawTicks: true
@@ -422,23 +419,12 @@ async function createScatterChart() {
                     titleColor: '#E6E6E6',
                     bodyColor: '#E6E6E6'
                 }
-            },
-            layout: {
-                padding: {
-                    left: 10,
-                    right: 10,
-                    top: 20,
-                    bottom: 10
-                }
-            },
-            elements: {
-                point: {
-                    pointStyle: 'circle',
-                }
             }
         }
     });
 }
+window.addEventListener('resize', createScatterChart);
+
 // Call the function to create the scatter chart
 createScatterChart();
 
