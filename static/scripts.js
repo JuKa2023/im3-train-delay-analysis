@@ -119,6 +119,7 @@ async function createChart(type) {
     }
 
     // Create new chart
+    // Create new chart
     chart = new Chart(ctx, {
         type: chartType,
         data: {
@@ -128,17 +129,17 @@ async function createChart(type) {
                     label: 'Zugverspätungen',
                     data: dataVerspaetungen,
                     borderColor: '#5F94D7',
-                    backgroundColor: 'transparent', // Changed to always be transparent for line charts
+                    backgroundColor: 'transparent',
                     fill: false,
-                    yAxisID: 'y' // This dataset will use the left y-axis
+                    yAxisID: 'y'
                 },
                 {
                     label: 'Wetterstörungen',
                     data: dataWetterstoerungen,
                     borderColor: '#8C238C',
-                    backgroundColor: 'transparent', // Changed to always be transparent for line charts
+                    backgroundColor: 'transparent',
                     fill: false,
-                    yAxisID: 'y1' // This dataset will use the right y-axis
+                    yAxisID: 'y1'
                 }
             ]
         },
@@ -163,11 +164,16 @@ async function createChart(type) {
                     border: {
                         color: '#BFBFBF' // Set the color of the x-axis line
                     },
+                    title: {  // Add axis title
+                        display: true,
+                        text: 'X-Axis Label',  // Replace with actual x-axis description
+                        color: '#E6E6E6'
+                    }
                 },
                 y: {
-                    type: 'linear', // Linear scale for the left y-axis
+                    type: 'linear',
                     display: true,
-                    position: 'left', // Left side
+                    position: 'left',
                     ticks: {
                         color: '#BFBFBF' // Set the color of the y-axis labels
                     },
@@ -176,23 +182,31 @@ async function createChart(type) {
                     },
                     border: {
                         color: '#BFBFBF' // Set the color of the y-axis line
+                    },
+                    title: {  // Add axis title for left y-axis
+                        display: true,
+                        text: 'Zugverspätungen (Unit)',  // Replace with actual left y-axis description
+                        color: '#E6E6E6'
                     }
-
-
                 },
                 y1: {
-                    type: 'linear', // Linear scale for the right y-axis
+                    type: 'linear',
                     display: true,
-                    position: 'right', // Right side
+                    position: 'right',
                     ticks: {
-                        color: '#BFBFBF' // Set the color of the right y-axis labels (same as left)
+                        color: '#BFBFBF' // Set the color of the right y-axis labels
                     },
                     grid: {
-                        drawOnChartArea: false, // No grid lines for the right y-axis (optional)
+                        drawOnChartArea: false, // No grid lines for right y-axis
                     },
                     border: {
                         color: '#BFBFBF' // Set the color of the right y-axis line
                     },
+                    title: {  // Add axis title for right y-axis
+                        display: true,
+                        text: 'Wetterstörungen (Unit)',  // Replace with actual right y-axis description
+                        color: '#E6E6E6'
+                    }
                 }
             },
             plugins: {
@@ -329,7 +343,7 @@ async function createScatterChart() {
         type: 'scatter',
         data: {
             datasets: [{
-                label: 'Disruption Score vs. Percentage of Delayed Trains',
+                label: 'Störungsindex vs. Prozentual Verspätete Züge',
                 data: processedData,
                 backgroundColor: '#D60001',
                 borderColor: '#D60001',
@@ -338,14 +352,13 @@ async function createScatterChart() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
             scales: {
                 x: {
                     type: 'linear',
-                    position: 'bottom',
                     title: {
                         display: true,
-                        text: 'Disruption Score',
+                        text: 'Störfaktor',
                         color: '#E6E6E6'
                     },
                     ticks: {
@@ -353,20 +366,19 @@ async function createScatterChart() {
                         padding: 10
                     },
                     grid: {
-                        drawOnChartArea: false,
-                        color: '#3C3C3C',
-                        borderColor: '#E6E6E6',
+                        color: '#3C3C3C',  // Add this to include grid lines
+                        borderColor: '#BFBFBF',
                         drawBorder: true,
                         drawTicks: true
                     },
                     border: {
-                        color: '#E6E6E6'
+                        color: '#BFBFBF'
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: 'Percentage of Delayed Trains (%)',
+                        text: 'Prozentual Verspätete Züge (%)',
                         color: '#E6E6E6'
                     },
                     ticks: {
@@ -374,14 +386,13 @@ async function createScatterChart() {
                         padding: 10
                     },
                     grid: {
-                        drawOnChartArea: false,
-                        color: 'transparent',
-                        borderColor: '#E6E6E6',
+                        color: '#3C3C3C',  // Add this to include grid lines
+                        borderColor: '#BFBFBF',
                         drawBorder: true,
                         drawTicks: true
                     },
                     border: {
-                        color: '#E6E6E6'
+                        color: '#BFBFBF'
                     }
                 }
             },
@@ -390,7 +401,7 @@ async function createScatterChart() {
                     display: true,
                     position: 'bottom',
                     labels: {
-                        color: '#E6E6E6' // Set the color of the legend text
+                        color: '#E6E6E6'
                     }
                 },
                 tooltip: {
