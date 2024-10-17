@@ -29,18 +29,18 @@
             <article class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
                 <section class="border border-gray-100 p-6 rounded-lg relative">
                     <p class="text-lg font-semibold mb-2">Durchschnittliche wöchentliche Verspätungen</p>
-                    <p class="text-3xl font-bold">66</p>
+                    <p class="text-3xl font-bold" id="avg-weekly-delays">-</p>
                     <p class="text-sm text-gray-400">Züge pro Woche</p>
                 </section>
                 <section class="border border-gray-100 p-6 rounded-lg relative">
                     <p class="text-lg font-semibold mb-2">Wetterkorrelation</p>
-                    <p class="text-3xl font-bold">73%</p>
+                    <p class="text-3xl font-bold" id="weather-correlation">-</p>
                     <p class="text-sm text-gray-400">wetterbedingte Verspätungen</p>
                 </section>
                 <section class="border border-gray-100 p-6 rounded-lg relative">
-                    <p class="text-lg font-semibold mb-2">Durchschnittlich schlechtes wetter</p>
-                    <p class="text-3xl font-bold">2</p>
-                    <p class="text-sm text-gray-400"> Tage pro Woche</p>
+                    <p class="text-lg font-semibold mb-2">Durchschnittlich schlechtes Wetter</p>
+                    <p class="text-3xl font-bold" id="avg-bad-weather-days">-</p>
+                    <p class="text-sm text-gray-400">Tage pro Woche</p>
                 </section>
             </article>
 
@@ -111,7 +111,8 @@
                         Probleme hindeuten
                         könnte.</p>
                     <p class="mt-4 text-sm">Die Spitzen in beiden Kategorien (Zugverspätungen und Wetterstörungen)
-                        konzentrieren sich häufig auf bestimmte Tageszeiten. Dies deutet darauf hin, dass bestimmte
+                        konzentrieren sich häufig auf bestimmte
+                        Tageszeiten. Dies deutet darauf hin, dass bestimmte
                         Tageszeiten besonders anfällig
                         für wetterbedingte Störungen im Zugverkehr sind, was wichtig für die betriebliche Planung und
                         das Fahrgastmanagement ist.</p>

@@ -16,6 +16,46 @@ const descriptions = {
 const ctx = document.getElementById('myChart').getContext('2d');
 let chart;
 
+// Function to fetch data for statistics
+async function fetchStatisticsData() {
+    const response = await fetch('api.php?resolution=daily');
+    return await response.json();
+}
+
+// Function to calculate statistics
+function calculateStatistics(data) {
+    const totalWeeks = Math.ceil(data.length / 7);
+    
+    const totalDelays = data.reduce((sum, item) => sum + parseInt(item.total_delays), 0);
+    const avgWeeklyDelays = Math.round(totalDelays / totalWeeks);
+    
+    const weatherRelatedDelays = data.filter(item => parseFloat(item.disruption_score) > 0.5).length;
+    const weatherCorrelation = Math.round((weatherRelatedDelays / data.length) * 100);
+    
+    const badWeatherDays = data.filter(item => parseFloat(item.disruption_score) > 1).length;
+    const avgBadWeatherDays = Math.round((badWeatherDays / totalWeeks) * 7); // Convert to days per week
+
+    return {
+        avgWeeklyDelays,
+        weatherCorrelation,
+        avgBadWeatherDays
+    };
+}
+
+// Function to update statistics in HTML
+function updateStatistics(stats) {
+    document.getElementById('avg-weekly-delays').textContent = stats.avgWeeklyDelays;
+    document.getElementById('weather-correlation').textContent = `${stats.weatherCorrelation}%`;
+    document.getElementById('avg-bad-weather-days').textContent = stats.avgBadWeatherDays;
+}
+
+// Function to initialize statistics
+async function initializeStatistics() {
+    const data = await fetchStatisticsData();
+    const stats = calculateStatistics(data);
+    updateStatistics(stats);
+}
+
 // Fetch Combined Train and Weather Data
 async function fetchCombinedData(resolution = 'daily') {
     const response = await fetch(`api.php?resolution=${resolution}`);
@@ -231,8 +271,12 @@ function setDropdownWidth() {
     dropdownMenu.style.width = `${longestWordWidth + 50}px`;
 }
 
-// Initial Chart Load
-createChart('monthly');
+// Initial Chart Load and Statistics Initialization
+document.addEventListener('DOMContentLoaded', function() {
+    initializeStatistics();
+    createChart('monthly');
+    createScatterChart();
+});
 
 // Dropdown Menu Toggle
 const dropdownButton = document.getElementById('dropdownButton');
