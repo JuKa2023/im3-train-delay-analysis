@@ -48,7 +48,7 @@ try {
             AVG(snowfall) as avg_snowfall,
             AVG(wind_gusts_10m) as avg_wind_gusts,
             AVG(weather_code) as avg_weather_code,
-            (AVG(wind_speed) * 0.4 + AVG(wind_gusts_10m) * 0.5 + AVG(rain) * 0.2 + AVG(showers) * 0.2 + AVG(snowfall) * 0.3) AS disruption_score
+            (AVG(wind_speed) * 0.2 + AVG(wind_gusts_10m) * 0.5 + AVG(rain) * 0.1 + AVG(showers) * 0.2 + AVG(snowfall) * 0.7) AS disruption_score
         FROM weather_data
         WHERE timestamp >= NOW() - INTERVAL {$timeInterval}
         GROUP BY {$weatherDateFormat}

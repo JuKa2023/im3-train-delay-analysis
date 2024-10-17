@@ -7,7 +7,7 @@ const chartOptions = [
 
 // Descriptions for each chart type
 const descriptions = {
-    monthly: "Dieses Diagramm zeigt die Beziehung zwischen Zugverspätungen und Wetterstörungen im Jahr 2023.",
+    monthly: "Dieses Diagramm zeigt die Beziehung zwischen Zugverspätungen und Wetterstörungen im Verlauf des letzten Monats",
     weekly: "Dieses Diagramm zeigt wöchentliche Trends der Zugverspätungen und Wetterstörungen. Höhere Werte sind während der Woche zu beobachten als am Wochenende.",
     daily: "Dieses Diagramm zeigt tägliche Muster der Zugverspätungen und Wetterstörungen, wobei morgens und abends die Spitzenzeiten sind."
 };
@@ -22,21 +22,33 @@ async function fetchStatisticsData() {
     return await response.json();
 }
 
-// Function to calculate statistics
 function calculateStatistics(data) {
-    const totalWeeks = Math.ceil(data.length / 7);
-    
+    const totalWeeks = Math.ceil(data.length / 7); // Assuming data points are daily
+
+    // Total number of trains and delays
     const totalDelays = data.reduce((sum, item) => sum + parseInt(item.total_delays), 0);
+    const totalTrains = data.reduce((sum, item) => sum + parseInt(item.total_trains), 0);
+
     const avgWeeklyDelays = Math.round(totalDelays / totalWeeks);
-    
-    const weatherRelatedDelays = data.filter(item => parseFloat(item.disruption_score) > 0.5).length;
-    const weatherCorrelation = Math.round((weatherRelatedDelays / data.length) * 100);
-    
-    const badWeatherDays = data.filter(item => parseFloat(item.disruption_score) > 1).length;
-    const avgBadWeatherDays = Math.round((badWeatherDays / totalWeeks) * 7); // Convert to days per week
+
+    //Total trains per week
+    const totalTrainsPerWeek = Math.round(totalTrains / totalWeeks);
+
+
+    // Weather-related delays (only delays on days with disruption score > 1.0)
+    const weatherRelatedDelays = data
+        .filter(item => parseFloat(item.disruption_score) > 15.0)
+        .reduce((sum, item) => sum + parseInt(item.total_delays), 0);
+
+    const weatherCorrelation = Math.round((weatherRelatedDelays / totalDelays) * 100);
+
+    // Average number of bad weather days per week
+    const badWeatherDays = data.filter(item => parseFloat(item.disruption_score) > 1.0).length;
+    const avgBadWeatherDays = Math.round(badWeatherDays / totalWeeks);
 
     return {
         avgWeeklyDelays,
+        totalTrainsPerWeek,
         weatherCorrelation,
         avgBadWeatherDays
     };
@@ -47,6 +59,7 @@ function updateStatistics(stats) {
     document.getElementById('avg-weekly-delays').textContent = stats.avgWeeklyDelays;
     document.getElementById('weather-correlation').textContent = `${stats.weatherCorrelation}%`;
     document.getElementById('avg-bad-weather-days').textContent = stats.avgBadWeatherDays;
+    document.getElementById('total-trains-per-week').textContent = `/${stats.totalTrainsPerWeek}`;
 }
 
 // Function to initialize statistics
@@ -272,7 +285,7 @@ function setDropdownWidth() {
 }
 
 // Initial Chart Load and Statistics Initialization
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initializeStatistics();
     createChart('monthly');
     createScatterChart();

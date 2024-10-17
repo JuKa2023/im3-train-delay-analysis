@@ -28,18 +28,21 @@
             <!-- Statistic Cards -->
             <article class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
                 <section class="border border-gray-100 p-6 rounded-lg relative">
-                    <p class="text-lg font-semibold mb-2">Durchschnittliche wöchentliche Verspätungen</p>
-                    <p class="text-3xl font-bold" id="avg-weekly-delays">-</p>
-                    <p class="text-sm text-gray-400">Züge pro Woche</p>
+                    <p class="text-lg font-semibold mb-2">Durchschnittliche Verspätete Züge</p>
+                    <div class="flex items-baseline space-x-2">
+                        <p class="text-5xl font-bold" id="avg-weekly-delays">-</p>
+                        <p class="text-sm" id="total-trains-per-week">-</p>
+                    </div>
+                    <p class="text-sm text-gray-400">pro Woche</p>
                 </section>
                 <section class="border border-gray-100 p-6 rounded-lg relative">
                     <p class="text-lg font-semibold mb-2">Wetterkorrelation</p>
-                    <p class="text-3xl font-bold" id="weather-correlation">-</p>
+                    <p class="text-5xl font-bold" id="weather-correlation">-</p>
                     <p class="text-sm text-gray-400">wetterbedingte Verspätungen</p>
                 </section>
                 <section class="border border-gray-100 p-6 rounded-lg relative">
                     <p class="text-lg font-semibold mb-2">Durchschnittlich schlechtes Wetter</p>
-                    <p class="text-3xl font-bold" id="avg-bad-weather-days">-</p>
+                    <p class="text-5xl font-bold" id="avg-bad-weather-days">-</p>
                     <p class="text-sm text-gray-400">Tage pro Woche</p>
                 </section>
             </article>
@@ -61,6 +64,10 @@
 
                     <h3 class="text-xl font-semibold mb-4">Zugverspätungen und Wetterstörungen von den Zügen ab Bern
                     </h3>
+                    <p class="mt-4 text-sm">Die Wetterstörungen werden durch einen "Störungsindex" dargestellt, der
+                        Faktoren wie Wind, Regen, Schnee und Sturmböen kombiniert. Je höher der Index, desto stärker
+                        könnten diese Wetterbedingungen den Zugverkehr beeinträchtigen. Dieser Index hilft uns, den
+                        Einfluss des Wetters auf Zugverspätungen besser zu verstehen.</p>
                     <div class="mb-10 mt-4 relative">
                         <!-- Chart Container -->
                         <div
@@ -129,7 +136,8 @@
                             class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
                             <canvas id="scatterChart" class="w-full h-full"></canvas>
                         </div>
-                        <p class="text-15px">Dieses Streudiagramm veranschaulicht eine mögliche Korrelation zwischen Wetterstörungen und Zugverspätungen.</p>
+                        <p class="text-15px">Dieses Streudiagramm veranschaulicht eine mögliche Korrelation zwischen
+                            Wetterstörungen und Zugverspätungen.</p>
                     </div>
                 </section>
             </article>
@@ -137,11 +145,13 @@
             <!-- Conclusion Section -->
             <article class="mb-10">
                 <h2 class="text-2xl font-semibold mb-4">Fazit</h2>
-                <p class="mt-4 text-sm">This data story highlights the significant impact of weather on train
-                    punctuality. By understanding these patterns,
-                    rail services can better prepare for and mitigate the effects of weather-related disruptions,
-                    ultimately improving
-                    the reliability of train schedules for passengers.</p>
+                <p class="mt-4 text-sm">Trotz der Annahme, dass Wetterbedingungen wie starker Wind, Regen oder Schnee zu
+                    Zugverspätungen führen, zeigen unsere aktuellen Daten keine signifikante Korrelation zwischen
+                    Wetterstörungen und Verspätungen. Während an sechs Tagen pro Woche eher schlechtes Wetter herrschte,
+                    blieb der Einfluss auf die Pünktlichkeit der Züge minimal. Dies deutet darauf hin, dass Wetter nur
+                    einer von mehreren Faktoren ist, die Zugverspätungen verursachen können. Weitere Untersuchungen
+                    könnten notwendig sein, um betriebliche oder infrastrukturelle Gründe für die Verspätungen besser zu
+                    verstehen.</p>
             </article>
         </div>
     </main>
