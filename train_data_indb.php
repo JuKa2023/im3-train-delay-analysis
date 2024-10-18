@@ -1,16 +1,9 @@
 <?php
-
-// Fetch the train details
-$trainDetails = include('train_data_fetch.php');  // This fetches the full array from train_data_fetch.php
-
-// Include the database connection file
 require_once 'config.php';
+$trainDetails = include('src/train_data_fetch.php');
 
-// Initialize an array to store the response
 $response = [];
-
 try {
-    // Establish PDO connection using the config file details
     $pdo = new PDO($dsn, $username, $password, $options);
 
     // Process each train detail and insert it into the database if not exists
@@ -18,7 +11,6 @@ try {
         $departureTimestamp = $train['Departure Time Stamp'];
         $platform = $train['Platform'];
 
-        // Only attempt to insert valid timestamps
         if ($departureTimestamp !== 'No departure timestamp') {
             // Skip if the departure time is in the past
             $departureTimestampUtc = gmdate('Y-m-d H:i:s', $departureTimestamp);
@@ -38,15 +30,13 @@ try {
             $stmt = $pdo->prepare("SELECT id FROM stationtable WHERE departure_time_stamp = ? AND platform = ?");
             $stmt->execute([$departureTimestamp, $platform]);
 
-            // If no record is found, insert the new data
             if ($stmt->rowCount() == 0) {
-                // Prepare the insert statement
+                // Insert new record if it doesn't exist
                 $insertStmt = $pdo->prepare("
                     INSERT INTO stationtable (destination, departure, departure_time_stamp, departure_time, delay, platform)
                     VALUES (?, ?, ?, ?, ?, ?)
                 ");
 
-                // Execute the insertion
                 if ($insertStmt->execute([
                     $train['Train to'],
                     $train['Departure Station'],
@@ -69,14 +59,13 @@ try {
                     ];
                 }
             } else { 
-                // Record exists, update the delay
+                // Update existing record
                 $updateStmt = $pdo->prepare("
                     UPDATE stationtable 
                     SET delay = ?
                     WHERE departure_time_stamp = ? AND platform = ?
                 ");
 
-                // Execute the update
                 if ($updateStmt->execute([$train['Delay'], $departureTimestamp, $platform])) {
                     $response[] = [
                         "status" => "updated",
@@ -109,7 +98,6 @@ try {
     ];
 }
 
-// Output the response as JSON
-header('Content-Type: application/json');
+header('Content-Type: application/json'); // To improve visualisation in browser
 echo json_encode($response, JSON_PRETTY_PRINT);
 ?>

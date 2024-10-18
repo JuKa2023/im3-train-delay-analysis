@@ -1,11 +1,10 @@
-// Chart options and labels
+
 const chartOptions = [
     { type: 'monthly', label: 'Monatlich' },
     { type: 'weekly', label: 'Wöchentlich' },
     { type: 'daily', label: 'Täglich' }
 ];
 
-// Descriptions for each chart type
 const descriptions = {
     monthly: "Dieses Diagramm zeigt die Beziehung zwischen Zugverspätungen und Wetterstörungen im Verlauf des letzten Monats",
     weekly: "Dieses Diagramm zeigt wöchentliche Trends der Zugverspätungen und Wetterstörungen. Höhere Werte sind während der Woche zu beobachten als am Wochenende.",
@@ -16,7 +15,7 @@ const descriptions = {
 const ctx = document.getElementById('myChart').getContext('2d');
 let chart;
 
-// Function to fetch data for statistics
+// api.php: Fetch Statistics Data
 async function fetchStatisticsData() {
     const response = await fetch('api.php?resolution=daily');
     return await response.json();
@@ -33,7 +32,6 @@ function calculateStatistics(data) {
 
     //Total trains per week
     const totalTrainsPerWeek = Math.round(totalTrains / totalWeeks);
-
 
     // Weather-related delays (only delays on days with disruption score > 1.0)
     const weatherRelatedDelays = data
@@ -54,7 +52,6 @@ function calculateStatistics(data) {
     };
 }
 
-// Function to update statistics in HTML
 function updateStatistics(stats) {
     document.getElementById('avg-weekly-delays').textContent = stats.avgWeeklyDelays;
     document.getElementById('weather-correlation').textContent = `${stats.weatherCorrelation}%`;
@@ -62,14 +59,13 @@ function updateStatistics(stats) {
     document.getElementById('total-trains-per-week').textContent = `/${stats.totalTrainsPerWeek}`;
 }
 
-// Function to initialize statistics
 async function initializeStatistics() {
     const data = await fetchStatisticsData();
     const stats = calculateStatistics(data);
     updateStatistics(stats);
 }
 
-// Fetch Combined Train and Weather Data
+// api.php: Fetch Weather & Train Data for given resolution (daily/hourly)
 async function fetchCombinedData(resolution = 'daily') {
     const response = await fetch(`api.php?resolution=${resolution}`);
     const combinedData = await response.json();
@@ -85,7 +81,6 @@ async function fetchCombinedData(resolution = 'daily') {
     }));
 }
 
-// Function to Create/Update Chart
 async function createChart(type) {
     // Destroy existing chart instance if it exists
     if (chart) {
@@ -115,11 +110,9 @@ async function createChart(type) {
         });
         dataVerspaetungen = combinedData.map(data => data.total_delays);
         dataWetterstoerungen = combinedData.map(data => data.disruption_score);
-        chartType = 'line'; // Changed from 'bar' to 'line'
+        chartType = 'line';
     }
 
-    // Create new chart
-    // Create new chart
     chart = new Chart(ctx, {
         type: chartType,
         data: {
@@ -156,17 +149,17 @@ async function createChart(type) {
                 x: {
                     display: true,
                     ticks: {
-                        color: '#E6E6E6' // Set the color of the x-axis labels
+                        color: '#E6E6E6'
                     },
                     grid: {
-                        color: '#3C3C3C' // Set the color of the x-axis grid lines
+                        color: '#3C3C3C'
                     },
                     border: {
-                        color: '#BFBFBF' // Set the color of the x-axis line
+                        color: '#BFBFBF'
                     },
-                    title: {  // Add axis title
+                    title: {
                         display: true,
-                        text: 'X-Axis Label',  // Replace with actual x-axis description
+                        text: 'X-Axis Label',
                         color: '#E6E6E6'
                     }
                 },
@@ -175,17 +168,17 @@ async function createChart(type) {
                     display: true,
                     position: 'left',
                     ticks: {
-                        color: '#BFBFBF' // Set the color of the y-axis labels
+                        color: '#BFBFBF'
                     },
                     grid: {
-                        color: '#3C3C3C' // Set the color of the y-axis grid lines
+                        color: '#3C3C3C'
                     },
                     border: {
-                        color: '#BFBFBF' // Set the color of the y-axis line
+                        color: '#BFBFBF'
                     },
-                    title: {  // Add axis title for left y-axis
+                    title: {
                         display: true,
-                        text: 'Zugverspätungen (Unit)',  // Replace with actual left y-axis description
+                        text: 'Zugverspätungen (Unit)',
                         color: '#E6E6E6'
                     }
                 },
@@ -194,17 +187,17 @@ async function createChart(type) {
                     display: true,
                     position: 'right',
                     ticks: {
-                        color: '#BFBFBF' // Set the color of the right y-axis labels
+                        color: '#BFBFBF'
                     },
                     grid: {
-                        drawOnChartArea: false, // No grid lines for right y-axis
+                        drawOnChartArea: false,
                     },
                     border: {
-                        color: '#BFBFBF' // Set the color of the right y-axis line
+                        color: '#BFBFBF'
                     },
-                    title: {  // Add axis title for right y-axis
+                    title: {
                         display: true,
-                        text: 'Wetterstörungen (Unit)',  // Replace with actual right y-axis description
+                        text: 'Wetterstörungen (Unit)',
                         color: '#E6E6E6'
                     }
                 }
@@ -214,7 +207,7 @@ async function createChart(type) {
                     display: true,
                     position: 'bottom',
                     labels: {
-                        color: '#E6E6E6' // Set the color of the legend text
+                        color: '#E6E6E6'
                     }
                 },
                 tooltip: {
@@ -226,24 +219,20 @@ async function createChart(type) {
         }
     });
 
-    // Update the chart description
     document.getElementById('chartDescription').innerText = descriptions[type];
 
     // Update the dropdown button text
     const dropdownButton = document.getElementById('dropdownButton');
     const selectedOption = chartOptions.find(option => option.type === type);
-    dropdownButton.innerHTML = `${selectedOption.label} <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    dropdownButton.innerHTML = `${selectedOption.label} 
+    <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
     </svg>`;
 
-    // Set the dropdown menu width to match the button
     setDropdownWidth();
-
-    // Update the dropdown menu items
     updateDropdownMenu(type);
 }
 
-// Function to update the dropdown menu
 function updateDropdownMenu(selectedType) {
     const dropdownMenuItems = document.getElementById('dropdownMenuItems');
     // Clear existing menu items
@@ -274,7 +263,6 @@ function updateDropdownMenu(selectedType) {
     });
 }
 
-// Function to set the dropdown menu width
 function setDropdownWidth() {
     const dropdownButton = document.getElementById('dropdownButton');
     const dropdownMenu = document.getElementById('dropdownMenu');
@@ -287,7 +275,7 @@ function setDropdownWidth() {
         }
     });
 
-    // Create an invisible span to measure the width of the longest word
+
     const testSpan = document.createElement('span');
     testSpan.innerText = longestWord;
     testSpan.style.visibility = 'hidden'; // Make it invisible
@@ -295,8 +283,7 @@ function setDropdownWidth() {
     const longestWordWidth = testSpan.offsetWidth;
     document.body.removeChild(testSpan);
 
-    // Set the width of both the button and dropdown to match the longest word
-    dropdownButton.style.width = `${longestWordWidth + 50}px`; // Add some padding
+    dropdownButton.style.width = `${longestWordWidth + 50}px`;
     dropdownMenu.style.width = `${longestWordWidth + 50}px`;
 }
 
@@ -307,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function () {
     createScatterChart();
 });
 
-// Dropdown Menu Toggle
+
 const dropdownButton = document.getElementById('dropdownButton');
 const dropdownMenu = document.getElementById('dropdownMenu');
 
@@ -316,19 +303,14 @@ dropdownButton.addEventListener('click', function (event) {
     dropdownMenu.classList.toggle('hidden');
 });
 
-// Close the dropdown when clicking outside
 window.addEventListener('click', function (event) {
     if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
         dropdownMenu.classList.add('hidden');
     }
 });
 
-
-
-
-
+// Scatter Chart
 let scatterChart;
-
 async function createScatterChart() {
     if (scatterChart) {
         scatterChart.destroy();
@@ -423,13 +405,18 @@ async function createScatterChart() {
         }
     });
 }
-window.addEventListener('resize', createScatterChart);
 
-// Call the function to create the scatter chart
-createScatterChart();
-
-// Button state active
-function toggleActiveState(button) {
-    // Toggle the active state by adding/removing the border color class
-    button.classList.toggle('border-blue-500');
+function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+        const context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
 }
+
+// Create a debounced version of createScatterChart with a 300ms delay to avoid calling it too often and therefore flickering
+const debouncedCreateScatterChart = debounce(createScatterChart, 300);
+window.addEventListener('resize', debouncedCreateScatterChart);
+
+createScatterChart();
