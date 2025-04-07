@@ -2,11 +2,10 @@
 
 ![Header](docs/header.png)
 
-
 Ein Projekt von:
+
 - [@JuKa2023](https://github.com/JuKa2023)
 - [@SophiaIseli](https://github.com/SophiaIseli)
-
 
 Dieses Projekt untersucht den Zusammenhang zwischen Wetterbedingungen und Zugverspätungen in der Schweiz, mit Fokus auf Züge, die von Bern abfahren. Unter Verwendung von Wetterdaten der [Open-Meteo API](https://open-meteo.com/) und Zugverspätungsinformationen der [OpenTransport API](https://transport.opendata.ch/docs.html) analysieren wir, wie Wetterfaktoren wie Regen, Schnee und Wind die Pünktlichkeit der Züge beeinflussen.
 
@@ -41,7 +40,6 @@ Das Projekt zielt darauf ab, Benutzern zu helfen, Muster bei Zugverspätungen un
    - Analyse der Wetter-Verspätungs-Korrelation
    - Fazit zur Bedeutung der Wetterbedingungen für Zugverspätungen
 
-
 ## Verwendete Technologien und API
 
 - Backend: PHP für Datenverarbeitung und API-Entwicklung
@@ -62,7 +60,6 @@ Das Projekt zielt darauf ab, Benutzern zu helfen, Muster bei Zugverspätungen un
 ## Datenbankstruktur
 
 Das Projekt verwendet ein relationales Datenbankschema mit zwei Haupttabellen:
-
 
 ![ERD](docs/erd.png)
 
@@ -86,29 +83,50 @@ Das Projekt verwendet ein relationales Datenbankschema mit zwei Haupttabellen:
    - delay: INT, Verspätung in Minuten
    - platform: VARCHAR, Bahnsteig-Nummer
 
-Die weather_data-Tabelle speichert Zeitreihen von Wetterdaten, während die stationtable Zugverbindungen und deren Status erfasst. 
+Die weather_data-Tabelle speichert Zeitreihen von Wetterdaten, während die stationtable Zugverbindungen und deren Status erfasst.
 
-Dieses Schema ermöglicht effiziente Abfragen für verschiedene Zeiträume (stündlich, täglich, monatlich) durch einfache Aggregationen über die Zeitstempel-Spalten. Die Struktur unterstützt auch die Berechnung komplexer Metriken wie eines "Störungsindex", der verschiedene Wetterfaktoren kombiniert. 
+Dieses Schema ermöglicht effiziente Abfragen für verschiedene Zeiträume (stündlich, täglich, monatlich) durch einfache Aggregationen über die Zeitstempel-Spalten. Die Struktur unterstützt auch die Berechnung komplexer Metriken wie eines "Störungsindex", der verschiedene Wetterfaktoren kombiniert.
 
 Die regelmässige Aktualisierung beider Tabellen (alle 5 Minuten für Wetterdaten, alle 10 Minuten für Zugdaten) gewährleistet eine aktuelle Datenbasis für Echtzeit-Analysen und kurzfristige Vorhersagen.
 
-
 ## Setup
 
-Für die Einrichtung des Projekts:
+Für die Einrichtung des Projekts empfehlen wir die Verwendung von Docker, da dies die Installation und Konfiguration aller benötigten Komponenten vereinfacht:
 
-1. Kopieren Sie `example.config.php` zu `config.php`.
-2. Passen Sie in `config.php` die Datenbankverbindungsdaten an:
-   ```php
-   $host = 'ihr_datenbank_host';
-   $dbname = 'ihr_datenbankname';
-   $username = 'ihr_benutzername';
-   $password = 'ihr_passwort';
+1. Installation von Docker und Docker Compose (falls noch nicht vorhanden)
+2. Umgebungsdatei kopieren und anpassen:
+
+   ```bash
+   cp .env.example .env
    ```
 
-Hinweis: Ein laufender Webserver (z.B. Apache) und eine MySQL/MariaDB-Datenbank sind erforderlich. Die Einrichtung dieser Komponenten variiert je nach Betriebssystem und Präferenzen.
+3. Die `.env` Datei mit den gewünschten Konfigurationswerten anpassen
+4. Docker-Container starten:
 
+   ```bash
+   docker-compose up -d
+   ```
 
+5. Die Anwendung ist unter `http://localhost:8080` erreichbar
+
+Das Docker-Setup beinhaltet:
+
+- PHP 8.2 mit Apache
+- MySQL 8.0 Datenbank
+- Persistente Datenspeicherung
+- Umgebungsvariablen-Konfiguration
+- Netzwerkisolation zwischen den Diensten
+
+### Umgebungsvariablen
+
+Die Anwendung verwendet folgende Umgebungsvariablen:
+
+- `DB_HOST`: Datenbank-Host (Standard: mysql)
+- `DB_NAME`: Datenbankname (Standard: im3)
+- `DB_USER`: Datenbankbenutzer (Standard: root)
+- `DB_PASSWORD`: Datenbankpasswort
+- `APP_ENV`: Anwendungsumgebung (Entwicklung/Produktion)
+- `APP_DEBUG`: Debug-Modus (true/false)
 
 ## Reflektion
 
@@ -139,7 +157,6 @@ Nachfolgend einige reflektierende Gedanken und Erkenntnisse, die sich aus den Er
    - Gestaltung einer responsiven Benutzeroberfläche mit Tailwind CSS
    - Anpassung des Layouts für verschiedene Bildschirmgrössen
    - Lösung von spezifischen UI-Problemen, wie das Skalierungsproblem bei bestimmten Bildschirmbreiten
-
 
 ### Benutzte Ressourcen
 

@@ -1,0 +1,19 @@
+FROM alpine:latest
+
+# Install required packages
+RUN apk add --no-cache \
+    bash \
+    curl \
+    jq
+
+# Create log directory and file
+RUN mkdir -p /var/log && \
+    touch /var/log/data_updates.log && \
+    chmod 666 /var/log/data_updates.log
+
+# Copy the update script
+COPY scripts/update_data.sh /usr/local/bin/update_data.sh
+RUN chmod +x /usr/local/bin/update_data.sh
+
+# Run the update script
+CMD ["/usr/local/bin/update_data.sh"] 

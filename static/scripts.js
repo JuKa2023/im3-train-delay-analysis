@@ -1,4 +1,3 @@
-
 const chartOptions = [
     { type: 'monthly', label: 'Monatlich' },
     { type: 'weekly', label: 'Wöchentlich' },
@@ -6,7 +5,7 @@ const chartOptions = [
 ];
 
 const descriptions = {
-    monthly: "Dieses Diagramm zeigt die Beziehung zwischen Zugverspätungen und Wetterstörungen im Verlauf des letzten Monats",
+    monthly: "Dieses Diagramm zeigt die Beziehung zwischen Zugverspätungen und Wetterstörungen im Verlauf des letzten Monats. Die blaue Linie zeigt die Anzahl verspäteter Züge, während die violette Linie den Wetterstörungsindex darstellt.",
     weekly: "Dieses Diagramm zeigt wöchentliche Trends der Zugverspätungen und Wetterstörungen. Höhere Werte sind während der Woche zu beobachten als am Wochenende.",
     daily: "Dieses Diagramm zeigt tägliche Muster der Zugverspätungen und Wetterstörungen, wobei morgens und abends die Spitzenzeiten sind."
 };
@@ -119,7 +118,7 @@ async function createChart(type) {
             labels: labels,
             datasets: [
                 {
-                    label: 'Zugverspätungen',
+                    label: 'Anzahl verspäteter Züge',
                     data: dataVerspaetungen,
                     borderColor: '#5F94D7',
                     backgroundColor: 'transparent',
@@ -127,7 +126,7 @@ async function createChart(type) {
                     yAxisID: 'y'
                 },
                 {
-                    label: 'Wetterstörungen',
+                    label: 'Wetterstörungsindex',
                     data: dataWetterstoerungen,
                     borderColor: '#8C238C',
                     backgroundColor: 'transparent',
@@ -159,7 +158,7 @@ async function createChart(type) {
                     },
                     title: {
                         display: true,
-                        text: 'X-Axis Label',
+                        text: type === 'daily' ? 'Tageszeit' : 'Datum',
                         color: '#E6E6E6'
                     }
                 },
@@ -178,7 +177,7 @@ async function createChart(type) {
                     },
                     title: {
                         display: true,
-                        text: 'Zugverspätungen (Unit)',
+                        text: 'Anzahl verspäteter Züge (Anzahl)',
                         color: '#E6E6E6'
                     }
                 },
@@ -197,7 +196,7 @@ async function createChart(type) {
                     },
                     title: {
                         display: true,
-                        text: 'Wetterstörungen (Unit)',
+                        text: 'Wetterstörungsindex (0-100)',
                         color: '#E6E6E6'
                     }
                 }
@@ -207,13 +206,29 @@ async function createChart(type) {
                     display: true,
                     position: 'bottom',
                     labels: {
-                        color: '#E6E6E6'
+                        color: '#E6E6E6',
+                        usePointStyle: true,
+                        pointStyle: 'line'
                     }
                 },
                 tooltip: {
                     backgroundColor: '#3C3C3C',
                     titleColor: '#E6E6E6',
-                    bodyColor: '#E6E6E6'
+                    bodyColor: '#E6E6E6',
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.datasetIndex === 0) {
+                                label += context.parsed.y + ' Züge';
+                            } else {
+                                label += context.parsed.y.toFixed(2);
+                            }
+                            return label;
+                        }
+                    }
                 }
             }
         }
@@ -328,7 +343,7 @@ async function createScatterChart() {
         type: 'scatter',
         data: {
             datasets: [{
-                label: 'Störungsindex vs. Prozentual Verspätete Züge',
+                label: 'Verspätungen vs. Wetterstörungen',
                 data: processedData,
                 backgroundColor: '#D60001',
                 borderColor: '#D60001',
@@ -338,7 +353,7 @@ async function createScatterChart() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false, // Change this to false for better resizing
+            maintainAspectRatio: false,
             layout: {
                 padding: {
                     top: 10,
@@ -350,7 +365,7 @@ async function createScatterChart() {
                     display: true,
                     title: {
                         display: true,
-                        text: 'Störfaktor',
+                        text: 'Wetterstörungsindex',
                         color: '#E6E6E6'
                     },
                     ticks: {
@@ -371,7 +386,7 @@ async function createScatterChart() {
                     display: true,
                     title: {
                         display: true,
-                        text: 'Prozentual Verspätete Züge (%)',
+                        text: 'Anteil verspäteter Züge (%)',
                         color: '#E6E6E6'
                     },
                     ticks: {
@@ -399,7 +414,15 @@ async function createScatterChart() {
                 tooltip: {
                     backgroundColor: '#3C3C3C',
                     titleColor: '#E6E6E6',
-                    bodyColor: '#E6E6E6'
+                    bodyColor: '#E6E6E6',
+                    callbacks: {
+                        label: function (context) {
+                            return [
+                                `Wetterstörungsindex: ${context.parsed.x.toFixed(2)}`,
+                                `Verspätungen: ${context.parsed.y.toFixed(2)}%`
+                            ];
+                        }
+                    }
                 }
             }
         }

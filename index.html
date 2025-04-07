@@ -106,40 +106,37 @@
 
                         <!-- Description Paragraph with an ID -->
                         <p id="chartDescription" class="text-15px">Dieses Diagramm zeigt die Beziehung zwischen
-                            Zugverspätungen und Wetterstörungen.</p>
+                            Zugverspätungen und Wetterstörungen über den letzten Monat. Die blaue Linie zeigt die Anzahl
+                            verspäteter Züge, während die violette Linie den Wetterstörungsindex darstellt.</p>
                     </div>
 
                     <h4 class="text-xl font-semibold mt-8 mb-4">Wichtige Erkenntnisse</h4>
-                    <p class="mt-4 text-sm">In den letzten 24 Stunden können Spitzen bei Zugverspätungen und
-                        Wetterstörungen beobachtet werden, insbesondere zu bestimmten Zeiten, wie z.B. in den frühen
-                        Morgenstunden.</p>
-                    <p class="mt-4 text-sm">Ein Muster zeigt, dass Spitzen in den Wetterstörungen mit einem
-                        Anstieg der Zugverspätungen zusammenhängen können. Es gibt jedoch Phasen, in denen
-                        Zugverspätungen auch
-                        ohne signifikante Wetterstörungen auftreten, was auf andere externe Faktoren oder betriebliche
-                        Probleme hindeuten
-                        könnte.</p>
-                    <p class="mt-4 text-sm">Die Spitzen in beiden Kategorien (Zugverspätungen und Wetterstörungen)
-                        konzentrieren sich häufig auf bestimmte
-                        Tageszeiten. Dies deutet darauf hin, dass bestimmte
-                        Tageszeiten besonders anfällig
-                        für wetterbedingte Störungen im Zugverkehr sind, was wichtig für die betriebliche Planung und
-                        das Fahrgastmanagement ist.</p>
+                    <p class="mt-4 text-sm">Die Daten zeigen, dass Zugverspätungen und Wetterstörungen in bestimmten
+                        Zeiträumen korrelieren. Besonders auffällig sind die Spitzenwerte während der
+                        Hauptverkehrszeiten am Morgen und Abend.</p>
+                    <p class="mt-4 text-sm">Der Wetterstörungsindex kombiniert verschiedene Wetterfaktoren wie Wind,
+                        Regen und Schnee. Ein höherer Index deutet auf stärkere Wettereinflüsse hin, die potenziell den
+                        Zugverkehr beeinträchtigen könnten.</p>
+                    <p class="mt-4 text-sm">Die Analyse zeigt, dass extreme Wetterbedingungen (Index > 15) tatsächlich
+                        zu vermehrten Verspätungen führen können, während moderate Wetterbedingungen weniger Einfluss
+                        auf die Pünktlichkeit haben.</p>
                 </section>
 
 
                 <!-- Scatter Chart Section -->
                 <section>
                     <h2 class="text-2xl font-semibold mt-14 mb-4">Korrelation zwischen Wetter und Verspätungen</h2>
-                    <p class="mt-4 text-sm">Wir nehmen an, dass bei sehr starken Wetterausschlägen die Züge eher
-                        verspätet sind. Bei leichten Wetterstörungen, scheint die Korrelation nur sehr bedingt.</p>
+                    <p class="mt-4 text-sm">Das Streudiagramm zeigt die Beziehung zwischen dem Wetterstörungsindex und
+                        dem Prozentsatz verspäteter Züge. Jeder Punkt repräsentiert einen Zeitpunkt, wobei die x-Achse
+                        den Wetterstörungsindex und die y-Achse den Anteil verspäteter Züge anzeigt.</p>
                     <div class="mb-10 mt-4">
                         <div
                             class="bg-gray-800 p-4 rounded-lg mb-2 transform transition-transform duration-300 hover:scale-[1.02]">
                             <canvas id="scatterChart" class="w-full h-full"></canvas>
                         </div>
-                        <p class="text-15px">Dieses Streudiagramm veranschaulicht eine mögliche Korrelation zwischen
-                            Wetterstörungen und Zugverspätungen.</p>
+                        <p class="text-15px">Die roten Punkte zeigen die Verteilung der Verspätungen in Relation zum
+                            Wetterstörungsindex. Eine klare Korrelation ist bei extremen Wetterbedingungen (Index > 15)
+                            erkennbar.</p>
                     </div>
                 </section>
             </article>

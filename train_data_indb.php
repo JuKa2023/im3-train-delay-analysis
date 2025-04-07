@@ -26,6 +26,17 @@ try {
                 continue;
             }
 
+            // Format the departure time for MySQL
+            $departureTime = date('Y-m-d H:i:s', strtotime($train['Departure Time']));
+
+            // Handle delay value
+            $delay = $train['Delay'];
+            if ($delay === 'No delay' || $delay === null) {
+                $delay = 0;
+            } else {
+                $delay = (int)$delay;
+            }
+
             // Check if the entry already exists in the database
             $stmt = $pdo->prepare("SELECT id FROM stationtable WHERE departure_time_stamp = ? AND platform = ?");
             $stmt->execute([$departureTimestamp, $platform]);
@@ -41,8 +52,8 @@ try {
                     $train['Train to'],
                     $train['Departure Station'],
                     $departureTimestamp,
-                    $train['Departure Time'],
-                    $train['Delay'],
+                    $departureTime,
+                    $delay,
                     $platform
                 ])) {
                     $response[] = [
@@ -66,12 +77,12 @@ try {
                     WHERE departure_time_stamp = ? AND platform = ?
                 ");
 
-                if ($updateStmt->execute([$train['Delay'], $departureTimestamp, $platform])) {
+                if ($updateStmt->execute([$delay, $departureTimestamp, $platform])) {
                     $response[] = [
                         "status" => "updated",
                         "train_to" => $train['Train to'],
                         "message" => "Record updated successfully",
-                        "new_delay" => $train['Delay']
+                        "new_delay" => $delay
                     ];
                 } else {
                     $response[] = [

@@ -11,14 +11,15 @@ $rain = $weather_data['current']['rain'] ?? 0;
 $showers = $weather_data['current']['showers'] ?? 0; 
 $snowfall = $weather_data['current']['snowfall'] ?? 0;  
 $wind_gusts = $weather_data['current']['wind_gusts_10m'] ?? 0; 
+$timestamp = date('Y-m-d H:i:s'); // Current timestamp
 
 $response = [];
 
 try {
     $pdo = new PDO($dsn, $username, $password, $options);
 
-    $sql = "INSERT INTO weather_data (location, temperature_celsius, wind_speed, rain, weather_code, showers, snowfall, wind_gusts_10m) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO weather_data (location, temperature_celsius, wind_speed, rain, weather_code, showers, snowfall, wind_gusts_10m, timestamp) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $pdo->prepare($sql);
 
@@ -30,7 +31,8 @@ try {
         $weather_code,
         $showers,
         $snowfall,
-        $wind_gusts
+        $wind_gusts,
+        $timestamp
     ]);
 
     if ($success) {
@@ -45,7 +47,8 @@ try {
                 "weather_code" => $weather_code,
                 "showers" => $showers,
                 "snowfall" => $snowfall,
-                "wind_gusts_10m" => $wind_gusts
+                "wind_gusts_10m" => $wind_gusts,
+                "timestamp" => $timestamp
             ]
         ];
     } else {
