@@ -1,5 +1,5 @@
 <?php
-require_once 'src/util.php';
+require_once 'util.php';
 include 'config.php'; 
 
 function fetchCurrentWeatherData($latitude, $longitude) {

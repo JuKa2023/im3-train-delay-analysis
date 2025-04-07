@@ -2,7 +2,7 @@
 
 # Function for logging
 log() {
-    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" | tee -a /var/log/data_updates.log
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1"
 }
 
 # Main loop

@@ -1,5 +1,5 @@
 <?php
-require_once 'src/util.php';
+require_once 'util.php';
 
 $url = "http://transport.opendata.ch/v1/stationboard?station=Bern";
 $jsonData = fetchData($url);

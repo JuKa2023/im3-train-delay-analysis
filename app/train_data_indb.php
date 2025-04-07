@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once 'src/config.php';
 $trainDetails = include('src/train_data_fetch.php');
 
 $response = [];

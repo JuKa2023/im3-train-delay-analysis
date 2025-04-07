@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-require_once 'config.php';
+require_once 'src/config.php';
 
 try {
     // Establish PDO connection using the config file details

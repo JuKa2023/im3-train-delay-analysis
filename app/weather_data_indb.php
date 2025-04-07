@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once 'src/config.php';
 
 $weather_data = include('src/weather_data_fetch.php');
 

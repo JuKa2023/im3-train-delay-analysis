@@ -125,6 +125,7 @@ Die Anwendung verwendet folgende Umgebungsvariablen:
 - `DB_NAME`: Datenbankname (Standard: im3)
 - `DB_USER`: Datenbankbenutzer (Standard: root)
 - `DB_PASSWORD`: Datenbankpasswort
+- `DB_ROOT_PASSWORD`: Root-Passwort
 - `APP_ENV`: Anwendungsumgebung (Entwicklung/Produktion)
 - `APP_DEBUG`: Debug-Modus (true/false)
 
