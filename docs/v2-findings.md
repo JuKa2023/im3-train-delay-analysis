@@ -67,6 +67,7 @@ The piece is about the data: visualisation, playing with it, and a data story. W
 - **Keep regular-interval loading** as a base idea of the project.
 - **More than Bern.** Several regions, so the piece matters to people outside Bern too.
 - **Backend:** more structured than raw PHP. PocketBase or similar is fine, but don't overcomplicate it.
+- **Light and dark design.** Both themes are designed, charts included; v1 was dark only.
 
 **Proposed, not yet confirmed**
 
