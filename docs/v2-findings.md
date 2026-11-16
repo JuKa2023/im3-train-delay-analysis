@@ -54,6 +54,52 @@ Two full days of Ist-Daten, trains only: Wednesday 11 Nov 2026 and Sunday 8 Nov 
 - **Cancellations are included**, so they can be a measure of their own.
 - **Alert causes: not checked yet.** The alerts feed returns "unauthorised" without a key, and the data archive has no alerts archive.
 
+## Weather test: January and July 2026
+
+Weather matters in short, sharp moments, not day to day. Where a train leaves from matters far more. Heavy rain hours in July had 2.4–2.9× the usual late share in Zürich and Bern, but daily correlations stayed weak everywhere.
+
+What was tested: every train departure from Zürich HB, Bern, Visp, Bellinzona and Zermatt in January and July 2026 (about 207,000), joined with hourly [Open-Meteo](https://open-meteo.com/en/docs/historical-weather-api) weather at each station. "Late" means a measured departure 3+ minutes after schedule.
+
+| Station | Departures per month (Jan / Jul) | Late, Jan | Late, Jul | Cancelled, Jan | Cancelled, Jul |
+| --- | --- | --- | --- | --- | --- |
+| Zürich HB | 54,193 / 49,303 | 6.2% | 4.4% | 1.9% | 1.6% |
+| Bern | 32,297 / 32,638 | 2.9% | 3.0% | 1.4% | 1.3% |
+| Visp | 8,246 / 8,300 | 8.6% | 11.3% | 1.7% | 2.0% |
+| Bellinzona | 8,606 / 8,326 | 5.7% | 11.2% | 6.7% | 5.5% |
+| Zermatt | 2,750 / 2,733 | 3.6% | 7.1% | 0.3% | 1.0% |
+
+Late share in each weather condition, relative to normal (1.0 = normal; conditions with 10+ hours only; – = too few hours):
+
+| Condition | Zürich HB | Bern | Visp | Bellinzona |
+| --- | --- | --- | --- | --- |
+| Heavy rain, Jul (3+ mm in 3 h) | 2.44 (16 h) | 2.88 (16 h) | 1.54 (14 h) | – |
+| Hard frost, Jan (−5 °C or colder) | 1.82 (43 h) | 1.72 (87 h) | 1.08 (94 h) | – |
+| Rain, Jan (1+ mm in 3 h) | 1.67 (18 h) | 1.16 (30 h) | 1.52 (61 h) | 1.17 (43 h) |
+| Strong gusts, Jul (50+ km/h) | – | – | 0.76 (96 h) | 1.46 (18 h) |
+| Strong gusts, Jan (50+ km/h) | 1.08 (19 h) | 0.64 (30 h) | 1.32 (41 h) | – |
+| Snowing, Jan (0.5+ cm in 3 h) | 1.15 (25 h) | 0.92 (44 h) | – | – |
+| Snow on ground, Jan (5+ cm) | 0.71 (32 h) | 1.13 (38 h) | 1.00 (660 h) | 0.89 (123 h) |
+| Heat, Jul (30 °C or more) | 0.84 (86 h) | 0.90 (87 h) | 1.04 (129 h) | 1.00 (174 h) |
+
+**What the numbers say**
+
+- **The station is the biggest factor.** Bern stays at about 3% late in both months. Visp and Bellinzona reach about 11% in July, with no clear weather cause.
+- **Heavy rain is the clearest weather signal.** At 3+ mm in 3 hours in July, the late share rose to 2.4× normal in Zürich and 2.9× in Bern. That's only 16 hours per station.
+- **Hard frost may matter.** At −5 °C or colder, Zürich and Bern ran 1.7–1.8× normal. Much of that is one cold day, 6 Jan, the worst day of the month in Zürich (19% late), Bern and Visp, with no snow or rain.
+- **Snowfall and heat show almost nothing** at the station points. January 2026 had little snow at low altitude (25–44 snowy hours).
+- **Daily averages wash the effect out.** Day-level rank correlations were mostly between −0.3 and +0.3. The strongest was Visp, late share vs. daily snowfall, at +0.40.
+- **Bellinzona's cancellations aren't weather.** 6.7% of departures were cancelled in January, 7.2% even in dry, calm hours. Planned works or trains from Italy are likely causes, but this data can't tell.
+- **Many of the worst days aren't weather days.** Visp's worst day (30 Jul, 29% late) was dry. Bellinzona's worst cancellation day (15 Jan, 15.5%) had light rain.
+
+**How "normal" is defined:** each station's average late share for the same hour of day and service type (long-distance or regional) in that month. This separates weather from rush-hour effects.
+
+**Limits of this test**
+
+- Two months only. Extreme-weather hours are few, so single incidents can swing a result.
+- Open-Meteo history is reanalysis data, not station measurements. It recorded no thunderstorm hours at all, so storms couldn't be tested. MeteoSwiss station data would be worth checking.
+- Weather is taken at the station. Mountain and Gotthard delays may start somewhere else along the line.
+- A train that arrives late, for example from Italy, also leaves late. That counts here as a delay at that station.
+
 ## What we defined
 
 The piece is about the data: visualisation, playing with it, and a data story. Weather and train delays interlocking is the core.
@@ -92,9 +138,13 @@ The piece is about the data: visualisation, playing with it, and a data story. W
 
 - [ ] Register a free API key at [api-manager.opentransportdata.swiss](https://api-manager.opentransportdata.swiss/) and save it in a file, so the alert causes can be sampled
 - [ ] Sample alerts for about a day: how often is the cause something other than unknown or other?
-- [ ] Pull a month of Ist-Daten for the four stations plus Open-Meteo history: does weather show any effect, and does it differ by region?
+- [x] Pull Ist-Daten for the four stations plus Open-Meteo history (done for Jan and Jul 2026)
+- [ ] Check a full year, so rare weather (storms, heavy snow) gets enough hours
+- [ ] Try MeteoSwiss station data, since Open-Meteo history recorded no thunderstorms
+- [ ] Find out what happened on 6 Jan 2026 (worst day in Zürich, Bern and Visp, cold but dry)
+- [ ] Find out why Bellinzona cancels 6–7% of departures, even in calm weather
 - [ ] Decide the core question once the numbers are in
-- [ ] Choose the signature visual once the data's shape is known
+- [ ] Choose the signature visual once the data's shape is known (it has to work by the hour: daily averages hide the effect)
 - [ ] Pick the weather points for mountain lines (station only, or also along the route)
 - [ ] What is the interval loading for: showing a pipeline, keeping the piece live, or getting data nobody else has?
 
