@@ -114,10 +114,20 @@ The piece is about the data: visualisation, playing with it, and a data story. W
 - **More than Bern.** Several regions, so the piece matters to people outside Bern too.
 - **Backend:** more structured than raw PHP. PocketBase or similar is fine, but don't overcomplicate it.
 - **Light and dark design.** Both themes are designed, charts included; v1 was dark only.
+- **Core question:** "Does weather hit trains differently across Switzerland?" (decided 19 Nov 2026).
+- **Personal frame:** the piece follows the author's own path, from studying in Bern (v1, a Bern-only student project) to working in Zürich. Widening the data from Bern to several regions mirrors that.
+- **Regions, not single stations.** Users compare regions. A single station appears only when it's special (for example a mountain hub).
+- **"Late" means 3+ minutes,** in line with the SBB punctuality definition. Check SBB's exact wording before publishing.
+- **Playground controls:** region, time resolution (hourly vs daily, so readers can watch the effect disappear themselves), and switching between chart types for the same data.
+- **Feel: a creative website, not a report.** Modern and visual first. Classic charts play a supporting role at most.
+- **Main visual: a living map of Switzerland** (direction, 19 Nov 2026). Weather moves across the country over time, and stations and rail lines react as trains get late. A first sketch has played through a day with a time slider. The day-by-hour grid was rejected because it read too much like a thesis. A bolder second sketch is being tried: the rail network as the main shape with the cantons faded out, rain, snow and föhn wind as particles, trains as moving points that slow down in bad weather, and an optional sound layer.
+- **Language:** German first, to match the portfolio. Keep all text separate from the code so English can be added later.
+- **Build order:** start with a static dataset (12+ months, prepared once) and build the story and playground on it. Add the live pipeline and PocketBase afterwards.
+- **Seasons matter.** The backfill must cover winter and spring, when weather changes fastest. v1 only had autumn data.
 
 **Proposed, not yet confirmed**
 
-- **Four regions:** Zürich HB (big hub), Bern (the original), Visp (mountains, rather than Zermatt alone), Bellinzona (Ticino, rather than Lugano).
+- **Regions:** how each one is built (all stations in an area, a group of cantons, or a hub plus its lines). Starting set: Zürich (big hub), Bern (the original), Upper Valais around Visp (mountains), Ticino around Bellinzona.
 - **Sources:** drop transport.opendata.ch. Load Ist-Daten and Open-Meteo history nightly, backfill at least 12 months once, and poll service alerts every few minutes.
 - **Interval loading gets a job no backfill can do:** collecting disruption causes, which aren't archived anywhere.
 - **Stack:** a small Python + DuckDB import script for the large daily files, PocketBase for the stored hourly data, and Vue 3 + TypeScript with D3 or Observable Plot instead of Chart.js.
